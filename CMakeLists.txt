@@ -4,7 +4,7 @@ project(gst_dsexample_sources2)
 set(CMAKE_CXX_STANDARD 11)
 
 find_package(PkgConfig)
-
+find_package(CUDA REQUIRED)
 find_package(OpenCV REQUIRED)
 #pkg_check_modules( OpenCV REQUIRED opencv)
 #pkg_check_modules(GST REQUIRED gstreamer-1.0>=1.4)
@@ -17,15 +17,18 @@ pkg_check_modules(GSTREAMER-VIDEO REQUIRED gstreamer-video-1.0)
 pkg_check_modules(GSTREAMER-BASE REQUIRED gstreamer-base-1.0)
 
 include_directories(
-        .
+        ${CUDA_INCLUDE_DIRS}
         …/nvgstiva-app_sources/nvgstiva-app/includes
         dsexample_lib
+        /usr/include/gstreamer-1.0
+        /opt/nvidia/deepstream/deepstream-5.0/sources/includes
+        /usr/include/glib-2.0
         {GSTREAMER_INCLUDE_DIRS} {GSTREAMER-APP_INCLUDE_DIRS}
         {GSTREAMER-AUDIO_INCLUDE_DIRS} {GSTREAMER-PBUTILS_INCLUDE_DIRS}
         {GSTREAMER-FFT_INCLUDE_DIRS} {GSTREAMER-VIDEO_INCLUDE_DIRS}
         {GSTREAMER-BASE_INCLUDE_DIRS} {CMAKE_CURRENT_SOURCE_DIR}
-)
 
+)
 link_directories(
         {CMAKE_CURRENT_SOURCE_DIR} /usr/lib/aarch64-linux-gnu/tegra ../nvgstiva-app_sources/nvgstiva-app/src dsexample_lib {GSTREAMER_LIBRARY_DIRS}
         {GSTREAMER-APP_LIBRARY_DIRS} {GSTREAMER-AUDIO_LIBRARY_DIRS}
@@ -42,6 +45,7 @@ link_libraries(
         {GSTREAMER-AUDIO_LIBRARIES} {GSTREAMER-PBUTILS_LIBRARIES}
         {GSTREAMER-FFT_LIBRARIES} {GSTREAMER-VIDEO_LIBRARIES}
         {GSTREAMER-BASE_LIBRARIES} {OpenCV_LIBS}
+        ${OpenCV_LIBS}
 
 )
 #set(CMAKE_C_FLAGS “${CMAKE_C_FLAGS} -fPIC”)
