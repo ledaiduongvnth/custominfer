@@ -1,0 +1,4 @@
+/home/d/Downloads/clion-2019.3.6/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /mnt/hdd/CLionProjects/Dgst-dsxexample
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /mnt/hdd/CLionProjects/Dgst-dsxexample/cmake-build-debug

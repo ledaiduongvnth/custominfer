@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="gst_dsexample_sources2"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;CMake Files\..\;CMake Files\..\..\;CMake Files\..\..\..\;CMake Files\..\..\..\..\;CMake Files\..\..\..\..\usr\;CMake Files\..\..\..\..\usr\lib\;CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\;CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\;CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\opencv4\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/mnt/hdd/CLionProjects/Dgst-dsxexample/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/mnt/hdd/CLionProjects/Dgst-dsxexample/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/mnt/hdd/CLionProjects/Dgst-dsxexample/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/mnt/hdd/CLionProjects/Dgst-dsxexample/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/mnt/hdd/CLionProjects/Dgst-dsxexample/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/mnt/hdd/CLionProjects/Dgst-dsxexample/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/mnt/hdd/CLionProjects/Dgst-dsxexample/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/mnt/hdd/CLionProjects/Dgst-dsxexample/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/mnt/hdd/CLionProjects/Dgst-dsxexample/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/mnt/hdd/CLionProjects/Dgst-dsxexample/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="gst_dsexample_sources2">
+				<Option output="/mnt/hdd/CLionProjects/Dgst-dsxexample/cmake-build-debug/libgst_dsexample_sources2.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/mnt/hdd/CLionProjects/Dgst-dsxexample/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/local/cuda-10.1/include"/>
+					<Add directory="/mnt/hdd/CLionProjects/Dgst-dsxexample/…/nvgstiva-app_sources/nvgstiva-app/includes"/>
+					<Add directory="/mnt/hdd/CLionProjects/Dgst-dsxexample/dsexample_lib"/>
+					<Add directory="/usr/include/gstreamer-1.0"/>
+					<Add directory="/opt/nvidia/deepstream/deepstream-5.0/sources/includes"/>
+					<Add directory="/usr/include/glib-2.0"/>
+					<Add directory="/mnt/hdd/CLionProjects/Dgst-dsxexample/{GSTREAMER_INCLUDE_DIRS}"/>
+					<Add directory="/mnt/hdd/CLionProjects/Dgst-dsxexample/{GSTREAMER-APP_INCLUDE_DIRS}"/>
+					<Add directory="/mnt/hdd/CLionProjects/Dgst-dsxexample/{GSTREAMER-AUDIO_INCLUDE_DIRS}"/>
+					<Add directory="/mnt/hdd/CLionProjects/Dgst-dsxexample/{GSTREAMER-PBUTILS_INCLUDE_DIRS}"/>
+					<Add directory="/mnt/hdd/CLionProjects/Dgst-dsxexample/{GSTREAMER-FFT_INCLUDE_DIRS}"/>
+					<Add directory="/mnt/hdd/CLionProjects/Dgst-dsxexample/{GSTREAMER-VIDEO_INCLUDE_DIRS}"/>
+					<Add directory="/mnt/hdd/CLionProjects/Dgst-dsxexample/{GSTREAMER-BASE_INCLUDE_DIRS}"/>
+					<Add directory="/mnt/hdd/CLionProjects/Dgst-dsxexample/{CMAKE_CURRENT_SOURCE_DIR}"/>
+					<Add directory="/usr/include/opencv4"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/mnt/hdd/CLionProjects/Dgst-dsxexample/cmake-build-debug/Makefile&quot;  VERBOSE=1 gst_dsexample_sources2"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/mnt/hdd/CLionProjects/Dgst-dsxexample/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/mnt/hdd/CLionProjects/Dgst-dsxexample/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/mnt/hdd/CLionProjects/Dgst-dsxexample/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="gst_dsexample_sources2/fast">
+				<Option output="/mnt/hdd/CLionProjects/Dgst-dsxexample/cmake-build-debug/libgst_dsexample_sources2.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/mnt/hdd/CLionProjects/Dgst-dsxexample/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/local/cuda-10.1/include"/>
+					<Add directory="/mnt/hdd/CLionProjects/Dgst-dsxexample/…/nvgstiva-app_sources/nvgstiva-app/includes"/>
+					<Add directory="/mnt/hdd/CLionProjects/Dgst-dsxexample/dsexample_lib"/>
+					<Add directory="/usr/include/gstreamer-1.0"/>
+					<Add directory="/opt/nvidia/deepstream/deepstream-5.0/sources/includes"/>
+					<Add directory="/usr/include/glib-2.0"/>
+					<Add directory="/mnt/hdd/CLionProjects/Dgst-dsxexample/{GSTREAMER_INCLUDE_DIRS}"/>
+					<Add directory="/mnt/hdd/CLionProjects/Dgst-dsxexample/{GSTREAMER-APP_INCLUDE_DIRS}"/>
+					<Add directory="/mnt/hdd/CLionProjects/Dgst-dsxexample/{GSTREAMER-AUDIO_INCLUDE_DIRS}"/>
+					<Add directory="/mnt/hdd/CLionProjects/Dgst-dsxexample/{GSTREAMER-PBUTILS_INCLUDE_DIRS}"/>
+					<Add directory="/mnt/hdd/CLionProjects/Dgst-dsxexample/{GSTREAMER-FFT_INCLUDE_DIRS}"/>
+					<Add directory="/mnt/hdd/CLionProjects/Dgst-dsxexample/{GSTREAMER-VIDEO_INCLUDE_DIRS}"/>
+					<Add directory="/mnt/hdd/CLionProjects/Dgst-dsxexample/{GSTREAMER-BASE_INCLUDE_DIRS}"/>
+					<Add directory="/mnt/hdd/CLionProjects/Dgst-dsxexample/{CMAKE_CURRENT_SOURCE_DIR}"/>
+					<Add directory="/usr/include/opencv4"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/mnt/hdd/CLionProjects/Dgst-dsxexample/cmake-build-debug/Makefile&quot;  VERBOSE=1 gst_dsexample_sources2/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/mnt/hdd/CLionProjects/Dgst-dsxexample/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/mnt/hdd/CLionProjects/Dgst-dsxexample/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/mnt/hdd/CLionProjects/Dgst-dsxexample/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/mnt/hdd/CLionProjects/Dgst-dsxexample/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/mnt/hdd/CLionProjects/Dgst-dsxexample/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/mnt/hdd/CLionProjects/Dgst-dsxexample/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/mnt/hdd/CLionProjects/Dgst-dsxexample/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/mnt/hdd/CLionProjects/Dgst-dsxexample/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/mnt/hdd/CLionProjects/Dgst-dsxexample/dsexample_lib/dsexample_lib.c">
+			<Option target="gst_dsexample_sources2"/>
+		</Unit>
+		<Unit filename="/mnt/hdd/CLionProjects/Dgst-dsxexample/dsexample_lib/dsexample_lib.h">
+			<Option target="gst_dsexample_sources2"/>
+		</Unit>
+		<Unit filename="/mnt/hdd/CLionProjects/Dgst-dsxexample/gstdsexample.cpp">
+			<Option target="gst_dsexample_sources2"/>
+		</Unit>
+		<Unit filename="/mnt/hdd/CLionProjects/Dgst-dsxexample/gstdsexample.h">
+			<Option target="gst_dsexample_sources2"/>
+		</Unit>
+		<Unit filename="/mnt/hdd/CLionProjects/Dgst-dsxexample/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/mnt/hdd/CLionProjects/Dgst-dsxexample/../../../../usr/lib/x86_64-linux-gnu/cmake/opencv4/OpenCVConfig-version.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\opencv4\"/>
+		</Unit>
+		<Unit filename="/mnt/hdd/CLionProjects/Dgst-dsxexample/../../../../usr/lib/x86_64-linux-gnu/cmake/opencv4/OpenCVConfig.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\opencv4\"/>
+		</Unit>
+		<Unit filename="/mnt/hdd/CLionProjects/Dgst-dsxexample/../../../../usr/lib/x86_64-linux-gnu/cmake/opencv4/OpenCVModules-release.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\opencv4\"/>
+		</Unit>
+		<Unit filename="/mnt/hdd/CLionProjects/Dgst-dsxexample/../../../../usr/lib/x86_64-linux-gnu/cmake/opencv4/OpenCVModules.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\opencv4\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>
