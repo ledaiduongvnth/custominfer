@@ -1,0 +1,3 @@
+/mnt/hdd/CLionProjects/Dgst-dsxexample/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/mnt/hdd/CLionProjects/Dgst-dsxexample/cmake-build-debug/CMakeFiles/Dgst_dsxexample.dir
+/mnt/hdd/CLionProjects/Dgst-dsxexample/cmake-build-debug/CMakeFiles/edit_cache.dir

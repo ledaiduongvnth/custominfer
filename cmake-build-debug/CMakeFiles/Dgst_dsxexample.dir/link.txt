@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/Dgst_dsxexample.dir/main.cpp.o  -o Dgst_dsxexample 
