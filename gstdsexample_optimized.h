@@ -36,7 +36,7 @@
 #include "nvbufsurftransform.h"
 #include "gst-nvquery.h"
 #include "gstnvdsmeta.h"
-#include "dsexample_lib/dsexample_lib.h"
+#include "custominfer_lib/custominfer_lib.h"
 #include "nvtx3/nvToolsExt.h"
 
 #include <condition_variable>
@@ -44,7 +44,7 @@
 #include <thread>
 
 /* Package and library details required for plugin_init */
-#define PACKAGE "dsexample"
+#define PACKAGE "custominfer"
 #define VERSION "1.0"
 #define LICENSE "Proprietary"
 #define DESCRIPTION "NVIDIA example plugin for integration with DeepStream on DGPU/Jetson"
@@ -58,7 +58,7 @@ typedef struct _GstDsExample GstDsExample;
 typedef struct _GstDsExampleClass GstDsExampleClass;
 
 /* Standard boilerplate stuff */
-#define GST_TYPE_DSEXAMPLE (gst_dsexample_get_type())
+#define GST_TYPE_DSEXAMPLE (gst_custominfer_get_type())
 #define GST_DSEXAMPLE(obj) (G_TYPE_CHECK_INSTANCE_CAST((obj),GST_TYPE_DSEXAMPLE,GstDsExample))
 #define GST_DSEXAMPLE_CLASS(klass) (G_TYPE_CHECK_CLASS_CAST((klass),GST_TYPE_DSEXAMPLE,GstDsExampleClass))
 #define GST_DSEXAMPLE_GET_CLASS(obj) (G_TYPE_INSTANCE_GET_CLASS((obj), GST_TYPE_DSEXAMPLE, GstDsExampleClass))
@@ -66,7 +66,7 @@ typedef struct _GstDsExampleClass GstDsExampleClass;
 #define GST_IS_DSEXAMPLE_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE((klass),GST_TYPE_DSEXAMPLE))
 #define GST_DSEXAMPLE_CAST(obj)  ((GstDsExample *)(obj))
 
-/** Maximum batch size to be supported by dsexample. */
+/** Maximum batch size to be supported by custominfer. */
 #define NVDSEXAMPLE_MAX_BATCH_SIZE G_MAXUINT
 
 struct _GstDsExample
@@ -74,7 +74,7 @@ struct _GstDsExample
   GstBaseTransform base_trans;
 
   /** Context of the custom algorithm library */
-  DsExampleCtx *dsexamplelib_ctx;
+  DsExampleCtx *custominferlib_ctx;
 
   /** Processing Queue and related synchronization structures. */
 
@@ -201,7 +201,7 @@ struct _GstDsExampleClass
   GstBaseTransformClass parent_class;
 };
 
-GType gst_dsexample_get_type (void);
+GType gst_custominfer_get_type (void);
 
 G_END_DECLS
 #endif /* __GST_DSEXAMPLE_H__ */

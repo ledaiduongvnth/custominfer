@@ -53,12 +53,12 @@ CMAKE_BINARY_DIR = /mnt/hdd/CLionProjects/Dgst-dsxexample/cmake-build-debug
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
-all: CMakeFiles/gst_dsexample_sources2.dir/all
+all: CMakeFiles/gst_custominfer_sources2.dir/all
 
 .PHONY : all
 
 # The main recursive "clean" target.
-clean: CMakeFiles/gst_dsexample_sources2.dir/clean
+clean: CMakeFiles/gst_custominfer_sources2.dir/clean
 
 .PHONY : clean
 
@@ -68,31 +68,31 @@ preinstall:
 .PHONY : preinstall
 
 #=============================================================================
-# Target rules for target CMakeFiles/gst_dsexample_sources2.dir
+# Target rules for target CMakeFiles/gst_custominfer_sources2.dir
 
 # All Build rule for target.
-CMakeFiles/gst_dsexample_sources2.dir/all:
-	$(MAKE) -f CMakeFiles/gst_dsexample_sources2.dir/build.make CMakeFiles/gst_dsexample_sources2.dir/depend
-	$(MAKE) -f CMakeFiles/gst_dsexample_sources2.dir/build.make CMakeFiles/gst_dsexample_sources2.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/hdd/CLionProjects/Dgst-dsxexample/cmake-build-debug/CMakeFiles --progress-num=1,2,3 "Built target gst_dsexample_sources2"
-.PHONY : CMakeFiles/gst_dsexample_sources2.dir/all
+CMakeFiles/gst_custominfer_sources2.dir/all:
+	$(MAKE) -f CMakeFiles/gst_custominfer_sources2.dir/build.make CMakeFiles/gst_custominfer_sources2.dir/depend
+	$(MAKE) -f CMakeFiles/gst_custominfer_sources2.dir/build.make CMakeFiles/gst_custominfer_sources2.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/hdd/CLionProjects/Dgst-dsxexample/cmake-build-debug/CMakeFiles --progress-num=1,2,3 "Built target gst_custominfer_sources2"
+.PHONY : CMakeFiles/gst_custominfer_sources2.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/gst_dsexample_sources2.dir/rule: cmake_check_build_system
+CMakeFiles/gst_custominfer_sources2.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/hdd/CLionProjects/Dgst-dsxexample/cmake-build-debug/CMakeFiles 3
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/gst_dsexample_sources2.dir/all
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/gst_custominfer_sources2.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/hdd/CLionProjects/Dgst-dsxexample/cmake-build-debug/CMakeFiles 0
-.PHONY : CMakeFiles/gst_dsexample_sources2.dir/rule
+.PHONY : CMakeFiles/gst_custominfer_sources2.dir/rule
 
 # Convenience name for target.
-gst_dsexample_sources2: CMakeFiles/gst_dsexample_sources2.dir/rule
+gst_custominfer_sources2: CMakeFiles/gst_custominfer_sources2.dir/rule
 
-.PHONY : gst_dsexample_sources2
+.PHONY : gst_custominfer_sources2
 
 # clean rule for target.
-CMakeFiles/gst_dsexample_sources2.dir/clean:
-	$(MAKE) -f CMakeFiles/gst_dsexample_sources2.dir/build.make CMakeFiles/gst_dsexample_sources2.dir/clean
-.PHONY : CMakeFiles/gst_dsexample_sources2.dir/clean
+CMakeFiles/gst_custominfer_sources2.dir/clean:
+	$(MAKE) -f CMakeFiles/gst_custominfer_sources2.dir/build.make CMakeFiles/gst_custominfer_sources2.dir/clean
+.PHONY : CMakeFiles/gst_custominfer_sources2.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

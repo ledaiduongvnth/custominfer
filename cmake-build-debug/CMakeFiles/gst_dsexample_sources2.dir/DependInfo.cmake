@@ -5,7 +5,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "/mnt/hdd/CLionProjects/Dgst-dsxexample/dsexample_lib/dsexample_lib.c" "/mnt/hdd/CLionProjects/Dgst-dsxexample/cmake-build-debug/CMakeFiles/gst_dsexample_sources2.dir/dsexample_lib/dsexample_lib.c.o"
+  "/mnt/hdd/CLionProjects/Dgst-dsxexample/custominfer_lib/custominfer_lib.c" "/mnt/hdd/CLionProjects/Dgst-dsxexample/cmake-build-debug/CMakeFiles/gst_custominfer_sources2.dir/custominfer_lib/custominfer_lib.c.o"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 
@@ -13,7 +13,7 @@ set(CMAKE_C_COMPILER_ID "GNU")
 set(CMAKE_C_TARGET_INCLUDE_PATH
   "/usr/local/cuda-10.1/include"
   "../…/nvgstiva-app_sources/nvgstiva-app/includes"
-  "../dsexample_lib"
+  "../custominfer_lib"
   "/usr/include/gstreamer-1.0"
   "/opt/nvidia/deepstream/deepstream-5.0/sources/includes"
   "/usr/include/glib-2.0"
@@ -28,7 +28,7 @@ set(CMAKE_C_TARGET_INCLUDE_PATH
   "/usr/include/opencv4"
   )
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/mnt/hdd/CLionProjects/Dgst-dsxexample/gstdsexample.cpp" "/mnt/hdd/CLionProjects/Dgst-dsxexample/cmake-build-debug/CMakeFiles/gst_dsexample_sources2.dir/gstdsexample.cpp.o"
+  "/mnt/hdd/CLionProjects/Dgst-dsxexample/gstcustominfer.cpp" "/mnt/hdd/CLionProjects/Dgst-dsxexample/cmake-build-debug/CMakeFiles/gst_custominfer_sources2.dir/gstcustominfer.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -36,7 +36,7 @@ set(CMAKE_CXX_COMPILER_ID "GNU")
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "/usr/local/cuda-10.1/include"
   "../…/nvgstiva-app_sources/nvgstiva-app/includes"
-  "../dsexample_lib"
+  "../custominfer_lib"
   "/usr/include/gstreamer-1.0"
   "/opt/nvidia/deepstream/deepstream-5.0/sources/includes"
   "/usr/include/glib-2.0"

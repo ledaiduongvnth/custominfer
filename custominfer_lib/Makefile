@@ -21,5 +21,5 @@
 #################################################################################
 
 all:
-	gcc -ggdb -c -o dsexample_lib.o -fPIC dsexample_lib.c
-	ar rcs libdsexample.a dsexample_lib.o
+	gcc -ggdb -c -o custominfer_lib.o -fPIC custominfer_lib.c
+	ar rcs libcustominfer.a custominfer_lib.o

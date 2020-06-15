@@ -20,7 +20,7 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-#include "dsexample_lib.h"
+#include "custominfer_lib.h"
 #include <stdio.h>
 #include <stdlib.h>
 

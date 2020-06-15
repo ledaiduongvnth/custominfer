@@ -1,2 +1,2 @@
-/usr/bin/ar qc libgst_dsexample_sources2.a  CMakeFiles/gst_dsexample_sources2.dir/dsexample_lib/dsexample_lib.c.o CMakeFiles/gst_dsexample_sources2.dir/gstdsexample.cpp.o
-/usr/bin/ranlib libgst_dsexample_sources2.a
+/usr/bin/ar qc libgst_custominfer_sources2.a  CMakeFiles/gst_custominfer_sources2.dir/custominfer_lib/custominfer_lib.c.o CMakeFiles/gst_custominfer_sources2.dir/gstcustominfer.cpp.o
+/usr/bin/ranlib libgst_custominfer_sources2.a

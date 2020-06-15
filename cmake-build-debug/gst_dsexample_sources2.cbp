@@ -2,7 +2,7 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6"/>
 	<Project>
-		<Option title="gst_dsexample_sources2"/>
+		<Option title="gst_custominfer_sources2"/>
 		<Option makefile_is_custom="1"/>
 		<Option compiler="gcc"/>
 		<Option virtualFolders="CMake Files\;CMake Files\..\;CMake Files\..\..\;CMake Files\..\..\..\;CMake Files\..\..\..\..\;CMake Files\..\..\..\..\usr\;CMake Files\..\..\..\..\usr\lib\;CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\;CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\;CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\opencv4\;"/>
@@ -27,8 +27,8 @@
 					<DistClean command="/usr/bin/make -j8 -f &quot;/mnt/hdd/CLionProjects/Dgst-dsxexample/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="gst_dsexample_sources2">
-				<Option output="/mnt/hdd/CLionProjects/Dgst-dsxexample/cmake-build-debug/libgst_dsexample_sources2.a" prefix_auto="0" extension_auto="0"/>
+			<Target title="gst_custominfer_sources2">
+				<Option output="/mnt/hdd/CLionProjects/Dgst-dsxexample/cmake-build-debug/libgst_custominfer_sources2.a" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="/mnt/hdd/CLionProjects/Dgst-dsxexample/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="2"/>
@@ -36,7 +36,7 @@
 				<Compiler>
 					<Add directory="/usr/local/cuda-10.1/include"/>
 					<Add directory="/mnt/hdd/CLionProjects/Dgst-dsxexample/…/nvgstiva-app_sources/nvgstiva-app/includes"/>
-					<Add directory="/mnt/hdd/CLionProjects/Dgst-dsxexample/dsexample_lib"/>
+					<Add directory="/mnt/hdd/CLionProjects/Dgst-dsxexample/custominfer_lib"/>
 					<Add directory="/usr/include/gstreamer-1.0"/>
 					<Add directory="/opt/nvidia/deepstream/deepstream-5.0/sources/includes"/>
 					<Add directory="/usr/include/glib-2.0"/>
@@ -59,14 +59,14 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/mnt/hdd/CLionProjects/Dgst-dsxexample/cmake-build-debug/Makefile&quot;  VERBOSE=1 gst_dsexample_sources2"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/mnt/hdd/CLionProjects/Dgst-dsxexample/cmake-build-debug/Makefile&quot;  VERBOSE=1 gst_custominfer_sources2"/>
 					<CompileFile command="/usr/bin/make -j8 -f &quot;/mnt/hdd/CLionProjects/Dgst-dsxexample/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="/usr/bin/make -j8 -f &quot;/mnt/hdd/CLionProjects/Dgst-dsxexample/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="/usr/bin/make -j8 -f &quot;/mnt/hdd/CLionProjects/Dgst-dsxexample/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="gst_dsexample_sources2/fast">
-				<Option output="/mnt/hdd/CLionProjects/Dgst-dsxexample/cmake-build-debug/libgst_dsexample_sources2.a" prefix_auto="0" extension_auto="0"/>
+			<Target title="gst_custominfer_sources2/fast">
+				<Option output="/mnt/hdd/CLionProjects/Dgst-dsxexample/cmake-build-debug/libgst_custominfer_sources2.a" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="/mnt/hdd/CLionProjects/Dgst-dsxexample/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="2"/>
@@ -74,7 +74,7 @@
 				<Compiler>
 					<Add directory="/usr/local/cuda-10.1/include"/>
 					<Add directory="/mnt/hdd/CLionProjects/Dgst-dsxexample/…/nvgstiva-app_sources/nvgstiva-app/includes"/>
-					<Add directory="/mnt/hdd/CLionProjects/Dgst-dsxexample/dsexample_lib"/>
+					<Add directory="/mnt/hdd/CLionProjects/Dgst-dsxexample/custominfer_lib"/>
 					<Add directory="/usr/include/gstreamer-1.0"/>
 					<Add directory="/opt/nvidia/deepstream/deepstream-5.0/sources/includes"/>
 					<Add directory="/usr/include/glib-2.0"/>
@@ -97,7 +97,7 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/mnt/hdd/CLionProjects/Dgst-dsxexample/cmake-build-debug/Makefile&quot;  VERBOSE=1 gst_dsexample_sources2/fast"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/mnt/hdd/CLionProjects/Dgst-dsxexample/cmake-build-debug/Makefile&quot;  VERBOSE=1 gst_custominfer_sources2/fast"/>
 					<CompileFile command="/usr/bin/make -j8 -f &quot;/mnt/hdd/CLionProjects/Dgst-dsxexample/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="/usr/bin/make -j8 -f &quot;/mnt/hdd/CLionProjects/Dgst-dsxexample/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="/usr/bin/make -j8 -f &quot;/mnt/hdd/CLionProjects/Dgst-dsxexample/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
@@ -114,17 +114,17 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/mnt/hdd/CLionProjects/Dgst-dsxexample/dsexample_lib/dsexample_lib.c">
-			<Option target="gst_dsexample_sources2"/>
+		<Unit filename="/mnt/hdd/CLionProjects/Dgst-dsxexample/custominfer_lib/custominfer_lib.c">
+			<Option target="gst_custominfer_sources2"/>
 		</Unit>
-		<Unit filename="/mnt/hdd/CLionProjects/Dgst-dsxexample/dsexample_lib/dsexample_lib.h">
-			<Option target="gst_dsexample_sources2"/>
+		<Unit filename="/mnt/hdd/CLionProjects/Dgst-dsxexample/custominfer_lib/custominfer_lib.h">
+			<Option target="gst_custominfer_sources2"/>
 		</Unit>
-		<Unit filename="/mnt/hdd/CLionProjects/Dgst-dsxexample/gstdsexample.cpp">
-			<Option target="gst_dsexample_sources2"/>
+		<Unit filename="/mnt/hdd/CLionProjects/Dgst-dsxexample/gstcustominfer.cpp">
+			<Option target="gst_custominfer_sources2"/>
 		</Unit>
-		<Unit filename="/mnt/hdd/CLionProjects/Dgst-dsxexample/gstdsexample.h">
-			<Option target="gst_dsexample_sources2"/>
+		<Unit filename="/mnt/hdd/CLionProjects/Dgst-dsxexample/gstcustominfer.h">
+			<Option target="gst_custominfer_sources2"/>
 		</Unit>
 		<Unit filename="/mnt/hdd/CLionProjects/Dgst-dsxexample/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>

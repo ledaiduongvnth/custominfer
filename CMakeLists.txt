@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
-project(gst_dsexample_sources2)
+project(gst_custominfer_sources2)
 #set(CMAKE_CXX_FLAGS “-Wall -g”)
 set(CMAKE_CXX_STANDARD 11)
 
@@ -19,7 +19,7 @@ pkg_check_modules(GSTREAMER-BASE REQUIRED gstreamer-base-1.0)
 include_directories(
         ${CUDA_INCLUDE_DIRS}
         …/nvgstiva-app_sources/nvgstiva-app/includes
-        dsexample_lib
+        custominfer_lib
         /usr/include/gstreamer-1.0
         /opt/nvidia/deepstream/deepstream-5.0/sources/includes
         /usr/include/glib-2.0
@@ -30,14 +30,14 @@ include_directories(
 
 )
 link_directories(
-        {CMAKE_CURRENT_SOURCE_DIR} /usr/lib/aarch64-linux-gnu/tegra ../nvgstiva-app_sources/nvgstiva-app/src dsexample_lib {GSTREAMER_LIBRARY_DIRS}
+        {CMAKE_CURRENT_SOURCE_DIR} /usr/lib/aarch64-linux-gnu/tegra ../nvgstiva-app_sources/nvgstiva-app/src custominfer_lib {GSTREAMER_LIBRARY_DIRS}
         {GSTREAMER-APP_LIBRARY_DIRS} {GSTREAMER-AUDIO_LIBRARY_DIRS}
         {GSTREAMER-PBUTILS_LIBRARY_DIRS} {GSTREAMER-FFT_LIBRARY_DIRS}
         {GSTREAMER-VIDEO_LIBRARY_DIRS} {GSTREAMER-BASE_LIBRARY_DIRS}
 )
 
 link_libraries(
-        dsexample
+        custominfer
         nvbuf_utils
         gstnvivameta
         EGL
@@ -50,10 +50,10 @@ link_libraries(
 )
 #set(CMAKE_C_FLAGS “${CMAKE_C_FLAGS} -fPIC”)
 
-set (CMAKE_SHARED_LINKER_FLAGS “${CMAKE_SHARED_LINKER_FLAGS} -L/usr/lib/aarch64-linux-gnu/tegra -lnvbuf_utils -lgstnvivameta -Wl,-no-undefined -L dsexample_lib -ldsexample -lEGL”)
+set (CMAKE_SHARED_LINKER_FLAGS “${CMAKE_SHARED_LINKER_FLAGS} -L/usr/lib/aarch64-linux-gnu/tegra -lnvbuf_utils -lgstnvivameta -Wl,-no-undefined -L custominfer_lib -lcustominfer -lEGL”)
 
-add_library(gst_dsexample_sources2
-        dsexample_lib/dsexample_lib.c
-        dsexample_lib/dsexample_lib.h
-        gstdsexample.cpp
-        gstdsexample.h)
+add_library(gst_custominfer_sources2
+        custominfer_lib/custominfer_lib.c
+        custominfer_lib/custominfer_lib.h
+        gstcustominfer.cpp
+        gstcustominfer.h)

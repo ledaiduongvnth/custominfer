@@ -19,7 +19,7 @@
 # FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 # DEALINGS IN THE SOFTWARE.
 #################################################################################
-#enable this flag to use optimized dsexample plugin
+#enable this flag to use optimized custominfer plugin
 #it can also be exported from command line
 USE_OPTIMIZED_DSEXAMPLE?=0
 CUDA_VER?=
@@ -30,18 +30,18 @@ TARGET_DEVICE = $(shell gcc -dumpmachine | cut -f1 -d -)
 CXX:= g++
 
 ifeq ($(USE_OPTIMIZED_DSEXAMPLE),1)
-  SRCS:= gstdsexample_optimized.cpp
+  SRCS:= gstcustominfer_optimized.cpp
 else
-  SRCS:= gstdsexample.cpp
+  SRCS:= gstcustominfer.cpp
 endif
 
 INCS:= $(wildcard *.h)
-LIB:=libnvdsgst_dsexample.so
+LIB:=libnvdsgst_custominfer.so
 
 NVDS_VERSION:=5.0
 
-DEP:=dsexample_lib/libdsexample.a
-DEP_FILES:=$(wildcard dsexample_lib/dsexample_lib.* )
+DEP:=custominfer_lib/libcustominfer.a
+DEP_FILES:=$(wildcard custominfer_lib/custominfer_lib.* )
 DEP_FILES-=$(DEP)
 
 CFLAGS+= -fPIC -DDS_VERSION=\"5.0.0\" \
@@ -52,7 +52,7 @@ GST_INSTALL_DIR?=/opt/nvidia/deepstream/deepstream-$(NVDS_VERSION)/lib/gst-plugi
 LIB_INSTALL_DIR?=/opt/nvidia/deepstream/deepstream-$(NVDS_VERSION)/lib/
 
 LIBS := -shared -Wl,-no-undefined \
-	-L dsexample_lib -ldsexample \
+	-L custominfer_lib -lcustominfer \
 	-L/usr/local/cuda-$(CUDA_VER)/lib64/ -lcudart -ldl \
 	-lnppc -lnppig -lnpps -lnppicc -lnppidei \
 	-L$(LIB_INSTALL_DIR) -lnvdsgst_helper -lnvdsgst_meta -lnvds_meta -lnvbufsurface -lnvbufsurftransform\
@@ -79,7 +79,7 @@ $(LIB): $(OBJS) $(DEP) Makefile
 	$(CXX) -o $@ $(OBJS) $(LIBS)
 
 $(DEP): $(DEP_FILES)
-	$(MAKE) -C dsexample_lib/
+	$(MAKE) -C custominfer_lib/
 
 install: $(LIB)
 	cp -rv $(LIB) $(GST_INSTALL_DIR)

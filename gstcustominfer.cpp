@@ -26,10 +26,10 @@
 #include <iostream>
 #include <ostream>
 #include <fstream>
-#include "gstdsexample.h"
+#include "gstcustominfer.h"
 #include <sys/time.h>
-GST_DEBUG_CATEGORY_STATIC (gst_dsexample_debug);
-#define GST_CAT_DEFAULT gst_dsexample_debug
+GST_DEBUG_CATEGORY_STATIC (gst_custominfer_debug);
+#define GST_CAT_DEFAULT gst_custominfer_debug
 #define USE_EGLIMAGE 1
 /* enable to write transformed cvmat to files */
 /* #define DSEXAMPLE_DEBUG */
@@ -99,7 +99,7 @@ enum
 /* By default NVIDIA Hardware allocated memory flows through the pipeline. We
  * will be processing on this type of memory only. */
 #define GST_CAPS_FEATURE_MEMORY_NVMM "memory:NVMM"
-static GstStaticPadTemplate gst_dsexample_sink_template =
+static GstStaticPadTemplate gst_custominfer_sink_template =
 GST_STATIC_PAD_TEMPLATE ("sink",
     GST_PAD_SINK,
     GST_PAD_ALWAYS,
@@ -107,7 +107,7 @@ GST_STATIC_PAD_TEMPLATE ("sink",
         (GST_CAPS_FEATURE_MEMORY_NVMM,
             "{ NV12, RGBA, I420 }")));
 
-static GstStaticPadTemplate gst_dsexample_src_template =
+static GstStaticPadTemplate gst_custominfer_src_template =
 GST_STATIC_PAD_TEMPLATE ("src",
     GST_PAD_SRC,
     GST_PAD_ALWAYS,
@@ -116,26 +116,26 @@ GST_STATIC_PAD_TEMPLATE ("src",
             "{ NV12, RGBA, I420 }")));
 
 /* Define our element type. Standard GObject/GStreamer boilerplate stuff */
-#define gst_dsexample_parent_class parent_class
-G_DEFINE_TYPE (GstDsExample, gst_dsexample, GST_TYPE_BASE_TRANSFORM);
+#define gst_custominfer_parent_class parent_class
+G_DEFINE_TYPE (GstDsExample, gst_custominfer, GST_TYPE_BASE_TRANSFORM);
 
-static void gst_dsexample_set_property (GObject * object, guint prop_id,
+static void gst_custominfer_set_property (GObject * object, guint prop_id,
     const GValue * value, GParamSpec * pspec);
-static void gst_dsexample_get_property (GObject * object, guint prop_id,
+static void gst_custominfer_get_property (GObject * object, guint prop_id,
     GValue * value, GParamSpec * pspec);
 
-static gboolean gst_dsexample_set_caps (GstBaseTransform * btrans,
+static gboolean gst_custominfer_set_caps (GstBaseTransform * btrans,
     GstCaps * incaps, GstCaps * outcaps);
-static gboolean gst_dsexample_start (GstBaseTransform * btrans);
-static gboolean gst_dsexample_stop (GstBaseTransform * btrans);
+static gboolean gst_custominfer_start (GstBaseTransform * btrans);
+static gboolean gst_custominfer_stop (GstBaseTransform * btrans);
 
-static GstFlowReturn gst_dsexample_transform_ip (GstBaseTransform *
+static GstFlowReturn gst_custominfer_transform_ip (GstBaseTransform *
     btrans, GstBuffer * inbuf);
 
 static void
-attach_metadata_full_frame (GstDsExample * dsexample, NvDsFrameMeta *frame_meta,
+attach_metadata_full_frame (GstDsExample * custominfer, NvDsFrameMeta *frame_meta,
     gdouble scale_ratio, DsExampleOutput * output, guint batch_id);
-static void attach_metadata_object (GstDsExample * dsexample,
+static void attach_metadata_object (GstDsExample * custominfer,
     NvDsObjectMeta * obj_meta, DsExampleOutput * output);
 
 /* Install properties, set sink and src pad capabilities, override the required
@@ -143,7 +143,7 @@ static void attach_metadata_object (GstDsExample * dsexample,
  * element.
  */
 static void
-gst_dsexample_class_init (GstDsExampleClass * klass)
+gst_custominfer_class_init (GstDsExampleClass * klass)
 {
   GObjectClass *gobject_class;
   GstElementClass *gstelement_class;
@@ -157,15 +157,15 @@ gst_dsexample_class_init (GstDsExampleClass * klass)
   gstbasetransform_class = (GstBaseTransformClass *) klass;
 
   /* Overide base class functions */
-  gobject_class->set_property = GST_DEBUG_FUNCPTR (gst_dsexample_set_property);
-  gobject_class->get_property = GST_DEBUG_FUNCPTR (gst_dsexample_get_property);
+  gobject_class->set_property = GST_DEBUG_FUNCPTR (gst_custominfer_set_property);
+  gobject_class->get_property = GST_DEBUG_FUNCPTR (gst_custominfer_get_property);
 
-  gstbasetransform_class->set_caps = GST_DEBUG_FUNCPTR (gst_dsexample_set_caps);
-  gstbasetransform_class->start = GST_DEBUG_FUNCPTR (gst_dsexample_start);
-  gstbasetransform_class->stop = GST_DEBUG_FUNCPTR (gst_dsexample_stop);
+  gstbasetransform_class->set_caps = GST_DEBUG_FUNCPTR (gst_custominfer_set_caps);
+  gstbasetransform_class->start = GST_DEBUG_FUNCPTR (gst_custominfer_start);
+  gstbasetransform_class->stop = GST_DEBUG_FUNCPTR (gst_custominfer_stop);
 
   gstbasetransform_class->transform_ip =
-      GST_DEBUG_FUNCPTR (gst_dsexample_transform_ip);
+      GST_DEBUG_FUNCPTR (gst_custominfer_transform_ip);
 
   /* Install properties */
   g_object_class_install_property (gobject_class, PROP_UNIQUE_ID,
@@ -213,9 +213,9 @@ gst_dsexample_class_init (GstDsExampleClass * klass)
               G_PARAM_STATIC_STRINGS | GST_PARAM_MUTABLE_READY)));
   /* Set sink and src pad capabilities */
   gst_element_class_add_pad_template (gstelement_class,
-      gst_static_pad_template_get (&gst_dsexample_src_template));
+      gst_static_pad_template_get (&gst_custominfer_src_template));
   gst_element_class_add_pad_template (gstelement_class,
-      gst_static_pad_template_get (&gst_dsexample_sink_template));
+      gst_static_pad_template_get (&gst_custominfer_sink_template));
 
   /* Set metadata describing the element */
   gst_element_class_set_details_simple (gstelement_class,
@@ -227,9 +227,9 @@ gst_dsexample_class_init (GstDsExampleClass * klass)
 }
 
 static void
-gst_dsexample_init (GstDsExample * dsexample)
+gst_custominfer_init (GstDsExample * custominfer)
 {
-  GstBaseTransform *btrans = GST_BASE_TRANSFORM (dsexample);
+  GstBaseTransform *btrans = GST_BASE_TRANSFORM (custominfer);
 
   /* We will not be generating a new buffer. Just adding / updating
    * metadata. */
@@ -239,12 +239,12 @@ gst_dsexample_init (GstDsExample * dsexample)
   gst_base_transform_set_passthrough (GST_BASE_TRANSFORM (btrans), TRUE);
 
   /* Initialize all property variables to default values */
-  dsexample->unique_id = DEFAULT_UNIQUE_ID;
-  dsexample->processing_width = DEFAULT_PROCESSING_WIDTH;
-  dsexample->processing_height = DEFAULT_PROCESSING_HEIGHT;
-  dsexample->process_full_frame = DEFAULT_PROCESS_FULL_FRAME;
-  dsexample->blur_objects = DEFAULT_BLUR_OBJECTS;
-  dsexample->gpu_id = DEFAULT_GPU_ID;
+  custominfer->unique_id = DEFAULT_UNIQUE_ID;
+  custominfer->processing_width = DEFAULT_PROCESSING_WIDTH;
+  custominfer->processing_height = DEFAULT_PROCESSING_HEIGHT;
+  custominfer->process_full_frame = DEFAULT_PROCESS_FULL_FRAME;
+  custominfer->blur_objects = DEFAULT_BLUR_OBJECTS;
+  custominfer->gpu_id = DEFAULT_GPU_ID;
   /* This quark is required to identify NvDsMeta when iterating through
    * the buffer metadatas */
   if (!_dsmeta_quark)
@@ -254,28 +254,28 @@ gst_dsexample_init (GstDsExample * dsexample)
 /* Function called when a property of the element is set. Standard boilerplate.
  */
 static void
-gst_dsexample_set_property (GObject * object, guint prop_id,
+gst_custominfer_set_property (GObject * object, guint prop_id,
     const GValue * value, GParamSpec * pspec)
 {
-  GstDsExample *dsexample = GST_DSEXAMPLE (object);
+  GstDsExample *custominfer = GST_DSEXAMPLE (object);
   switch (prop_id) {
     case PROP_UNIQUE_ID:
-      dsexample->unique_id = g_value_get_uint (value);
+      custominfer->unique_id = g_value_get_uint (value);
       break;
     case PROP_PROCESSING_WIDTH:
-      dsexample->processing_width = g_value_get_int (value);
+      custominfer->processing_width = g_value_get_int (value);
       break;
     case PROP_PROCESSING_HEIGHT:
-      dsexample->processing_height = g_value_get_int (value);
+      custominfer->processing_height = g_value_get_int (value);
       break;
     case PROP_PROCESS_FULL_FRAME:
-      dsexample->process_full_frame = g_value_get_boolean (value);
+      custominfer->process_full_frame = g_value_get_boolean (value);
       break;
     case PROP_BLUR_OBJECTS:
-      dsexample->blur_objects = g_value_get_boolean (value);
+      custominfer->blur_objects = g_value_get_boolean (value);
       break;
     case PROP_GPU_DEVICE_ID:
-      dsexample->gpu_id = g_value_get_uint (value);
+      custominfer->gpu_id = g_value_get_uint (value);
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -287,29 +287,29 @@ gst_dsexample_set_property (GObject * object, guint prop_id,
  * boilerplate.
  */
 static void
-gst_dsexample_get_property (GObject * object, guint prop_id,
+gst_custominfer_get_property (GObject * object, guint prop_id,
     GValue * value, GParamSpec * pspec)
 {
-  GstDsExample *dsexample = GST_DSEXAMPLE (object);
+  GstDsExample *custominfer = GST_DSEXAMPLE (object);
 
   switch (prop_id) {
     case PROP_UNIQUE_ID:
-      g_value_set_uint (value, dsexample->unique_id);
+      g_value_set_uint (value, custominfer->unique_id);
       break;
     case PROP_PROCESSING_WIDTH:
-      g_value_set_int (value, dsexample->processing_width);
+      g_value_set_int (value, custominfer->processing_width);
       break;
     case PROP_PROCESSING_HEIGHT:
-      g_value_set_int (value, dsexample->processing_height);
+      g_value_set_int (value, custominfer->processing_height);
       break;
     case PROP_PROCESS_FULL_FRAME:
-      g_value_set_boolean (value, dsexample->process_full_frame);
+      g_value_set_boolean (value, custominfer->process_full_frame);
       break;
     case PROP_BLUR_OBJECTS:
-      g_value_set_boolean (value, dsexample->blur_objects);
+      g_value_set_boolean (value, custominfer->blur_objects);
       break;
     case PROP_GPU_DEVICE_ID:
-      g_value_set_uint (value, dsexample->gpu_id);
+      g_value_set_uint (value, custominfer->gpu_id);
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -321,55 +321,55 @@ gst_dsexample_get_property (GObject * object, guint prop_id,
  * Initialize all resources and start the output thread
  */
 static gboolean
-gst_dsexample_start (GstBaseTransform * btrans)
+gst_custominfer_start (GstBaseTransform * btrans)
 {
-  GstDsExample *dsexample = GST_DSEXAMPLE (btrans);
+  GstDsExample *custominfer = GST_DSEXAMPLE (btrans);
   NvBufSurfaceCreateParams create_params;
   DsExampleInitParams init_params =
-      { dsexample->processing_width, dsexample->processing_height,
-    dsexample->process_full_frame
+      { custominfer->processing_width, custominfer->processing_height,
+    custominfer->process_full_frame
   };
 
   GstQuery *queryparams = NULL;
   guint batch_size = 1;
 
   /* Algorithm specific initializations and resource allocation. */
-  dsexample->dsexamplelib_ctx = DsExampleCtxInit (&init_params);
+  custominfer->custominferlib_ctx = DsExampleCtxInit (&init_params);
 
-  GST_DEBUG_OBJECT (dsexample, "ctx lib %p \n", dsexample->dsexamplelib_ctx);
+  GST_DEBUG_OBJECT (custominfer, "ctx lib %p \n", custominfer->custominferlib_ctx);
 
-  CHECK_CUDA_STATUS (cudaSetDevice (dsexample->gpu_id),
+  CHECK_CUDA_STATUS (cudaSetDevice (custominfer->gpu_id),
       "Unable to set cuda device");
 
-  dsexample->batch_size = 1;
+  custominfer->batch_size = 1;
   queryparams = gst_nvquery_batch_size_new ();
   if (gst_pad_peer_query (GST_BASE_TRANSFORM_SINK_PAD (btrans), queryparams)
       || gst_pad_peer_query (GST_BASE_TRANSFORM_SRC_PAD (btrans), queryparams)) {
     if (gst_nvquery_batch_size_parse (queryparams, &batch_size)) {
-      dsexample->batch_size = batch_size;
+      custominfer->batch_size = batch_size;
     }
   }
-  GST_DEBUG_OBJECT (dsexample, "Setting batch-size %d \n",
-      dsexample->batch_size);
+  GST_DEBUG_OBJECT (custominfer, "Setting batch-size %d \n",
+      custominfer->batch_size);
   gst_query_unref (queryparams);
 
-  if (dsexample->process_full_frame && dsexample->blur_objects) {
+  if (custominfer->process_full_frame && custominfer->blur_objects) {
     GST_ERROR ("Error: does not support blurring while processing full frame");
     goto error;
   }
 
-  CHECK_CUDA_STATUS (cudaStreamCreate (&dsexample->cuda_stream),
+  CHECK_CUDA_STATUS (cudaStreamCreate (&custominfer->cuda_stream),
       "Could not create cuda stream");
 
-  if (dsexample->inter_buf)
-    NvBufSurfaceDestroy (dsexample->inter_buf);
-  dsexample->inter_buf = NULL;
+  if (custominfer->inter_buf)
+    NvBufSurfaceDestroy (custominfer->inter_buf);
+  custominfer->inter_buf = NULL;
 
   /* An intermediate buffer for NV12/RGBA to BGR conversion  will be
    * required. Can be skipped if custom algorithm can work directly on NV12/RGBA. */
-  create_params.gpuId  = dsexample->gpu_id;
-  create_params.width  = dsexample->processing_width;
-  create_params.height = dsexample->processing_height;
+  create_params.gpuId  = custominfer->gpu_id;
+  create_params.width  = custominfer->processing_width;
+  create_params.height = custominfer->processing_height;
   create_params.size = 0;
   create_params.colorFormat = NVBUF_COLOR_FORMAT_RGBA;
   create_params.layout = NVBUF_LAYOUT_PITCH;
@@ -379,45 +379,45 @@ gst_dsexample_start (GstBaseTransform * btrans)
   create_params.memType = NVBUF_MEM_CUDA_UNIFIED;
 #endif
 
-  if (NvBufSurfaceCreate (&dsexample->inter_buf, 1,
+  if (NvBufSurfaceCreate (&custominfer->inter_buf, 1,
           &create_params) != 0) {
-    GST_ERROR ("Error: Could not allocate internal buffer for dsexample");
+    GST_ERROR ("Error: Could not allocate internal buffer for custominfer");
     goto error;
   }
 
   /* Create host memory for storing converted/scaled interleaved RGB data */
-  CHECK_CUDA_STATUS (cudaMallocHost (&dsexample->host_rgb_buf,
-          dsexample->processing_width * dsexample->processing_height *
+  CHECK_CUDA_STATUS (cudaMallocHost (&custominfer->host_rgb_buf,
+          custominfer->processing_width * custominfer->processing_height *
           RGB_BYTES_PER_PIXEL), "Could not allocate cuda host buffer");
 
-  GST_DEBUG_OBJECT (dsexample, "allocated cuda buffer %p \n",
-      dsexample->host_rgb_buf);
+  GST_DEBUG_OBJECT (custominfer, "allocated cuda buffer %p \n",
+      custominfer->host_rgb_buf);
 
   /* CV Mat containing interleaved RGB data. This call does not allocate memory.
    * It uses host_rgb_buf as data. */
-  dsexample->cvmat =
-      new cv::Mat (dsexample->processing_height, dsexample->processing_width,
-      CV_8UC3, dsexample->host_rgb_buf,
-      dsexample->processing_width * RGB_BYTES_PER_PIXEL);
+  custominfer->cvmat =
+      new cv::Mat (custominfer->processing_height, custominfer->processing_width,
+      CV_8UC3, custominfer->host_rgb_buf,
+      custominfer->processing_width * RGB_BYTES_PER_PIXEL);
 
-  if (!dsexample->cvmat)
+  if (!custominfer->cvmat)
     goto error;
 
-  GST_DEBUG_OBJECT (dsexample, "created CV Mat\n");
+  GST_DEBUG_OBJECT (custominfer, "created CV Mat\n");
 
   return TRUE;
 error:
-  if (dsexample->host_rgb_buf) {
-    cudaFreeHost (dsexample->host_rgb_buf);
-    dsexample->host_rgb_buf = NULL;
+  if (custominfer->host_rgb_buf) {
+    cudaFreeHost (custominfer->host_rgb_buf);
+    custominfer->host_rgb_buf = NULL;
   }
 
-  if (dsexample->cuda_stream) {
-    cudaStreamDestroy (dsexample->cuda_stream);
-    dsexample->cuda_stream = NULL;
+  if (custominfer->cuda_stream) {
+    cudaStreamDestroy (custominfer->cuda_stream);
+    custominfer->cuda_stream = NULL;
   }
-  if (dsexample->dsexamplelib_ctx)
-    DsExampleCtxDeinit (dsexample->dsexamplelib_ctx);
+  if (custominfer->custominferlib_ctx)
+    DsExampleCtxDeinit (custominfer->custominferlib_ctx);
   return FALSE;
 }
 
@@ -425,33 +425,33 @@ error:
  * Stop the output thread and free up all the resources
  */
 static gboolean
-gst_dsexample_stop (GstBaseTransform * btrans)
+gst_custominfer_stop (GstBaseTransform * btrans)
 {
-  GstDsExample *dsexample = GST_DSEXAMPLE (btrans);
+  GstDsExample *custominfer = GST_DSEXAMPLE (btrans);
 
-  if (dsexample->inter_buf)
-    NvBufSurfaceDestroy(dsexample->inter_buf);
-  dsexample->inter_buf = NULL;
+  if (custominfer->inter_buf)
+    NvBufSurfaceDestroy(custominfer->inter_buf);
+  custominfer->inter_buf = NULL;
 
-  if (dsexample->cuda_stream)
-    cudaStreamDestroy (dsexample->cuda_stream);
-  dsexample->cuda_stream = NULL;
+  if (custominfer->cuda_stream)
+    cudaStreamDestroy (custominfer->cuda_stream);
+  custominfer->cuda_stream = NULL;
 
-  delete dsexample->cvmat;
-  dsexample->cvmat = NULL;
+  delete custominfer->cvmat;
+  custominfer->cvmat = NULL;
 
-  if (dsexample->host_rgb_buf) {
-    cudaFreeHost (dsexample->host_rgb_buf);
-    dsexample->host_rgb_buf = NULL;
+  if (custominfer->host_rgb_buf) {
+    cudaFreeHost (custominfer->host_rgb_buf);
+    custominfer->host_rgb_buf = NULL;
   }
 
-  GST_DEBUG_OBJECT (dsexample, "deleted CV Mat \n");
+  GST_DEBUG_OBJECT (custominfer, "deleted CV Mat \n");
 
   /* Deinit the algorithm library */
-  DsExampleCtxDeinit (dsexample->dsexamplelib_ctx);
-  dsexample->dsexamplelib_ctx = NULL;
+  DsExampleCtxDeinit (custominfer->custominferlib_ctx);
+  custominfer->custominferlib_ctx = NULL;
 
-  GST_DEBUG_OBJECT (dsexample, "ctx lib released \n");
+  GST_DEBUG_OBJECT (custominfer, "ctx lib released \n");
 
   return TRUE;
 }
@@ -460,17 +460,17 @@ gst_dsexample_stop (GstBaseTransform * btrans)
  * Called when source / sink pad capabilities have been negotiated.
  */
 static gboolean
-gst_dsexample_set_caps (GstBaseTransform * btrans, GstCaps * incaps,
+gst_custominfer_set_caps (GstBaseTransform * btrans, GstCaps * incaps,
     GstCaps * outcaps)
 {
-  GstDsExample *dsexample = GST_DSEXAMPLE (btrans);
+  GstDsExample *custominfer = GST_DSEXAMPLE (btrans);
   /* Save the input video information, since this will be required later. */
-  gst_video_info_from_caps (&dsexample->video_info, incaps);
+  gst_video_info_from_caps (&custominfer->video_info, incaps);
 
-  if (dsexample->blur_objects && !dsexample->process_full_frame) {
+  if (custominfer->blur_objects && !custominfer->process_full_frame) {
     /* requires RGBA format for blurring the objects in opencv */
-     if (dsexample->video_info.finfo->format != GST_VIDEO_FORMAT_RGBA) {
-      GST_ELEMENT_ERROR (dsexample, STREAM, FAILED,
+     if (custominfer->video_info.finfo->format != GST_VIDEO_FORMAT_RGBA) {
+      GST_ELEMENT_ERROR (custominfer, STREAM, FAILED,
           ("input format should be RGBA when using blur-objects property"), (NULL));
       goto error;
       }
@@ -490,7 +490,7 @@ error:
  * padded data and/or can work with RGBA.
  */
 static GstFlowReturn
-get_converted_mat (GstDsExample * dsexample, NvBufSurface *input_buf, gint idx,
+get_converted_mat (GstDsExample * custominfer, NvBufSurface *input_buf, gint idx,
     NvOSD_RectParams * crop_rect_params, gdouble & ratio, gint input_width,
     gint input_height)
 {
@@ -512,28 +512,28 @@ get_converted_mat (GstDsExample * dsexample, NvBufSurface *input_buf, gint idx,
   gint src_height = GST_ROUND_DOWN_2((unsigned int)crop_rect_params->height);
 
   /* Maintain aspect ratio */
-  double hdest = dsexample->processing_width * src_height / (double) src_width;
-  double wdest = dsexample->processing_height * src_width / (double) src_height;
+  double hdest = custominfer->processing_width * src_height / (double) src_width;
+  double wdest = custominfer->processing_height * src_width / (double) src_height;
   guint dest_width, dest_height;
 
-  if (hdest <= dsexample->processing_height) {
-    dest_width = dsexample->processing_width;
+  if (hdest <= custominfer->processing_height) {
+    dest_width = custominfer->processing_width;
     dest_height = hdest;
   } else {
     dest_width = wdest;
-    dest_height = dsexample->processing_height;
+    dest_height = custominfer->processing_height;
   }
 
   /* Configure transform session parameters for the transformation */
   transform_config_params.compute_mode = NvBufSurfTransformCompute_Default;
-  transform_config_params.gpu_id = dsexample->gpu_id;
-  transform_config_params.cuda_stream = dsexample->cuda_stream;
+  transform_config_params.gpu_id = custominfer->gpu_id;
+  transform_config_params.cuda_stream = custominfer->cuda_stream;
 
   /* Set the transform session parameters for the conversions executed in this
    * thread. */
   err = NvBufSurfTransformSetSessionParams (&transform_config_params);
   if (err != NvBufSurfTransformError_Success) {
-    GST_ELEMENT_ERROR (dsexample, STREAM, FAILED,
+    GST_ELEMENT_ERROR (custominfer, STREAM, FAILED,
         ("NvBufSurfTransformSetSessionParams failed with error %d", err), (NULL));
     goto error;
   }
@@ -542,7 +542,7 @@ get_converted_mat (GstDsExample * dsexample, NvBufSurface *input_buf, gint idx,
   ratio = MIN (1.0 * dest_width/ src_width, 1.0 * dest_height / src_height);
 
   if ((crop_rect_params->width == 0) || (crop_rect_params->height == 0)) {
-    GST_ELEMENT_ERROR (dsexample, STREAM, FAILED,
+    GST_ELEMENT_ERROR (custominfer, STREAM, FAILED,
         ("%s:crop_rect_params dimensions are zero",__func__), (NULL));
     goto error;
   }
@@ -566,40 +566,40 @@ get_converted_mat (GstDsExample * dsexample, NvBufSurface *input_buf, gint idx,
   transform_params.transform_filter = NvBufSurfTransformInter_Default;
 
   /* Memset the memory */
-  NvBufSurfaceMemSet (dsexample->inter_buf, 0, 0, 0);
+  NvBufSurfaceMemSet (custominfer->inter_buf, 0, 0, 0);
 
-  GST_DEBUG_OBJECT (dsexample, "Scaling and converting input buffer\n");
+  GST_DEBUG_OBJECT (custominfer, "Scaling and converting input buffer\n");
 
   /* Transformation scaling+format conversion if any. */
-  err = NvBufSurfTransform (&ip_surf, dsexample->inter_buf, &transform_params);
+  err = NvBufSurfTransform (&ip_surf, custominfer->inter_buf, &transform_params);
   if (err != NvBufSurfTransformError_Success) {
-    GST_ELEMENT_ERROR (dsexample, STREAM, FAILED,
+    GST_ELEMENT_ERROR (custominfer, STREAM, FAILED,
         ("NvBufSurfTransform failed with error %d while converting buffer", err),
         (NULL));
     goto error;
   }
   /* Map the buffer so that it can be accessed by CPU */
-  if (NvBufSurfaceMap (dsexample->inter_buf, 0, 0, NVBUF_MAP_READ) != 0){
+  if (NvBufSurfaceMap (custominfer->inter_buf, 0, 0, NVBUF_MAP_READ) != 0){
     goto error;
   }
 
   /* Cache the mapped data for CPU access */
-  NvBufSurfaceSyncForCpu (dsexample->inter_buf, 0, 0);
+  NvBufSurfaceSyncForCpu (custominfer->inter_buf, 0, 0);
 
   /* Use openCV to remove padding and convert RGBA to BGR. Can be skipped if
    * algorithm can handle padded RGBA data. */
   in_mat =
-      cv::Mat (dsexample->processing_height, dsexample->processing_width,
-      CV_8UC4, dsexample->inter_buf->surfaceList[0].mappedAddr.addr[0],
-      dsexample->inter_buf->surfaceList[0].pitch);
+      cv::Mat (custominfer->processing_height, custominfer->processing_width,
+      CV_8UC4, custominfer->inter_buf->surfaceList[0].mappedAddr.addr[0],
+      custominfer->inter_buf->surfaceList[0].pitch);
 
 #if (CV_MAJOR_VERSION >= 4)
-  cv::cvtColor (in_mat, *dsexample->cvmat, cv::COLOR_RGBA2BGR);
+  cv::cvtColor (in_mat, *custominfer->cvmat, cv::COLOR_RGBA2BGR);
 #else
-  cv::cvtColor (in_mat, *dsexample->cvmat, CV_RGBA2BGR);
+  cv::cvtColor (in_mat, *custominfer->cvmat, CV_RGBA2BGR);
 #endif
 
-  if (NvBufSurfaceUnMap (dsexample->inter_buf, 0, 0)){
+  if (NvBufSurfaceUnMap (custominfer->inter_buf, 0, 0)){
     goto error;
   }
 
@@ -607,16 +607,16 @@ get_converted_mat (GstDsExample * dsexample, NvBufSurface *input_buf, gint idx,
   /* To use the converted buffer in CUDA, create an EGLImage and then use
    * CUDA-EGL interop APIs */
   if (USE_EGLIMAGE) {
-    if (NvBufSurfaceMapEglImage (dsexample->inter_buf, 0) !=0 ) {
+    if (NvBufSurfaceMapEglImage (custominfer->inter_buf, 0) !=0 ) {
       goto error;
     }
 
-    /* dsexample->inter_buf->surfaceList[0].mappedAddr.eglImage
+    /* custominfer->inter_buf->surfaceList[0].mappedAddr.eglImage
      * Use interop APIs cuGraphicsEGLRegisterImage and
      * cuGraphicsResourceGetMappedEglFrame to access the buffer in CUDA */
 
     /* Destroy the EGLImage */
-    NvBufSurfaceUnMapEglImage (dsexample->inter_buf, 0);
+    NvBufSurfaceUnMapEglImage (custominfer->inter_buf, 0);
   }
 #endif
 
@@ -633,13 +633,13 @@ error:
  * Blur the detected objects when processing in object mode (full-frame=0)
  */
 static GstFlowReturn
-blur_objects (GstDsExample * dsexample, gint idx,
+blur_objects (GstDsExample * custominfer, gint idx,
     NvOSD_RectParams * crop_rect_params, cv::Mat in_mat)
 {
   cv::Rect crop_rect;
 
   if ((crop_rect_params->width == 0) || (crop_rect_params->height == 0)) {
-    GST_ELEMENT_ERROR (dsexample, STREAM, FAILED,
+    GST_ELEMENT_ERROR (custominfer, STREAM, FAILED,
         ("%s:crop_rect_params dimensions are zero",__func__), (NULL));
     return GST_FLOW_ERROR;
   }
@@ -658,9 +658,9 @@ blur_objects (GstDsExample * dsexample, gint idx,
  * Called when element recieves an input buffer from upstream element.
  */
 static GstFlowReturn
-gst_dsexample_transform_ip (GstBaseTransform * btrans, GstBuffer * inbuf)
+gst_custominfer_transform_ip (GstBaseTransform * btrans, GstBuffer * inbuf)
 {
-  GstDsExample *dsexample = GST_DSEXAMPLE (btrans);
+  GstDsExample *custominfer = GST_DSEXAMPLE (btrans);
   GstMapInfo in_map_info;
   GstFlowReturn flow_ret = GST_FLOW_ERROR;
   gdouble scale_ratio = 1.0;
@@ -672,8 +672,8 @@ gst_dsexample_transform_ip (GstBaseTransform * btrans, GstBuffer * inbuf)
   NvDsMetaList * l_frame = NULL;
   guint i = 0;
 
-  dsexample->frame_num++;
-  CHECK_CUDA_STATUS (cudaSetDevice (dsexample->gpu_id),
+  custominfer->frame_num++;
+  CHECK_CUDA_STATUS (cudaSetDevice (custominfer->gpu_id),
       "Unable to set cuda device");
 
   memset (&in_map_info, 0, sizeof (in_map_info));
@@ -683,21 +683,21 @@ gst_dsexample_transform_ip (GstBaseTransform * btrans, GstBuffer * inbuf)
   }
 
   surface = (NvBufSurface *) in_map_info.data;
-  GST_DEBUG_OBJECT (dsexample,
+  GST_DEBUG_OBJECT (custominfer,
       "Processing Frame %" G_GUINT64_FORMAT " Surface %p\n",
-      dsexample->frame_num, surface);
+      custominfer->frame_num, surface);
 
-  if (CHECK_NVDS_MEMORY_AND_GPUID (dsexample, surface))
+  if (CHECK_NVDS_MEMORY_AND_GPUID (custominfer, surface))
     goto error;
 
   batch_meta = gst_buffer_get_nvds_batch_meta (inbuf);
   if (batch_meta == nullptr) {
-    GST_ELEMENT_ERROR (dsexample, STREAM, FAILED,
+    GST_ELEMENT_ERROR (custominfer, STREAM, FAILED,
         ("NvDsBatchMeta not found for input buffer."), (NULL));
     return GST_FLOW_ERROR;
   }
 
-  if (dsexample->process_full_frame) {
+  if (custominfer->process_full_frame) {
     for (l_frame = batch_meta->frame_meta_list; l_frame != NULL;
       l_frame = l_frame->next)
     {
@@ -707,22 +707,22 @@ gst_dsexample_transform_ip (GstBaseTransform * btrans, GstBuffer * inbuf)
       /* Scale the entire frame to processing resolution */
       rect_params.left = 0;
       rect_params.top = 0;
-      rect_params.width = dsexample->video_info.width;
-      rect_params.height = dsexample->video_info.height;
+      rect_params.width = custominfer->video_info.width;
+      rect_params.height = custominfer->video_info.height;
 
       /* Scale and convert the frame */
-      if (get_converted_mat (dsexample, surface, i, &rect_params,
-            scale_ratio, dsexample->video_info.width,
-            dsexample->video_info.height) != GST_FLOW_OK) {
+      if (get_converted_mat (custominfer, surface, i, &rect_params,
+            scale_ratio, custominfer->video_info.width,
+            custominfer->video_info.height) != GST_FLOW_OK) {
         goto error;
       }
 
       /* Process to get the output */
       output =
-          DsExampleProcess (dsexample->dsexamplelib_ctx,
-          dsexample->cvmat->data);
+          DsExampleProcess (custominfer->custominferlib_ctx,
+          custominfer->cvmat->data);
       /* Attach the metadata for the full frame */
-      attach_metadata_full_frame (dsexample, frame_meta, scale_ratio, output, i);
+      attach_metadata_full_frame (custominfer, frame_meta, scale_ratio, output, i);
       i++;
       free (output);
     }
@@ -734,9 +734,9 @@ gst_dsexample_transform_ip (GstBaseTransform * btrans, GstBuffer * inbuf)
     NvDsObjectMeta *obj_meta = NULL;
 
 #ifndef __aarch64__
-    if (dsexample->blur_objects) {
+    if (custominfer->blur_objects) {
       if (surface->memType != NVBUF_MEM_CUDA_UNIFIED){
-        GST_ELEMENT_ERROR (dsexample, STREAM, FAILED,
+        GST_ELEMENT_ERROR (custominfer, STREAM, FAILED,
             ("%s:need NVBUF_MEM_CUDA_UNIFIED memory for opencv blurring",__func__), (NULL));
         return GST_FLOW_ERROR;
       }
@@ -749,11 +749,11 @@ gst_dsexample_transform_ip (GstBaseTransform * btrans, GstBuffer * inbuf)
       frame_meta = (NvDsFrameMeta *) (l_frame->data);
       cv::Mat in_mat;
 
-      if (dsexample->blur_objects) {
+      if (custominfer->blur_objects) {
         /* Map the buffer so that it can be accessed by CPU */
         if (surface->surfaceList[frame_meta->batch_id].mappedAddr.addr[0] == NULL){
           if (NvBufSurfaceMap (surface, frame_meta->batch_id, 0, NVBUF_MAP_READ_WRITE) != 0){
-            GST_ELEMENT_ERROR (dsexample, STREAM, FAILED,
+            GST_ELEMENT_ERROR (custominfer, STREAM, FAILED,
                 ("%s:buffer map to be accessed by CPU failed", __func__), (NULL));
             return GST_FLOW_ERROR;
           }
@@ -774,15 +774,15 @@ gst_dsexample_transform_ip (GstBaseTransform * btrans, GstBuffer * inbuf)
       {
         obj_meta = (NvDsObjectMeta *) (l_obj->data);
 
-        if (dsexample->blur_objects) {
+        if (custominfer->blur_objects) {
           /* gaussian blur the detected objects using opencv */
-          if (blur_objects (dsexample, frame_meta->batch_id,
+          if (blur_objects (custominfer, frame_meta->batch_id,
             &obj_meta->rect_params, in_mat) != GST_FLOW_OK) {
           /* Error in blurring, skip processing on object. */
-            GST_ELEMENT_ERROR (dsexample, STREAM, FAILED,
+            GST_ELEMENT_ERROR (custominfer, STREAM, FAILED,
             ("blurring the object failed"), (NULL));
             if (NvBufSurfaceUnMap (surface, frame_meta->batch_id, 0)){
-              GST_ELEMENT_ERROR (dsexample, STREAM, FAILED,
+              GST_ELEMENT_ERROR (custominfer, STREAM, FAILED,
                 ("%s:buffer unmap to be accessed by CPU failed", __func__), (NULL));
             }
             return GST_FLOW_ERROR;
@@ -797,25 +797,25 @@ gst_dsexample_transform_ip (GstBaseTransform * btrans, GstBuffer * inbuf)
           continue;
 
         /* Crop and scale the object */
-        if (get_converted_mat (dsexample,
+        if (get_converted_mat (custominfer,
               surface, frame_meta->batch_id, &obj_meta->rect_params,
-              scale_ratio, dsexample->video_info.width,
-              dsexample->video_info.height) != GST_FLOW_OK) {
+              scale_ratio, custominfer->video_info.width,
+              custominfer->video_info.height) != GST_FLOW_OK) {
           /* Error in conversion, skip processing on object. */
           continue;
         }
 
         /* Process the object crop to obtain label */
-        output = DsExampleProcess (dsexample->dsexamplelib_ctx,
-            dsexample->cvmat->data);
+        output = DsExampleProcess (custominfer->custominferlib_ctx,
+            custominfer->cvmat->data);
 
         /* Attach labels for the object */
-        attach_metadata_object (dsexample, obj_meta, output);
+        attach_metadata_object (custominfer, obj_meta, output);
 
         free (output);
       }
 
-      if (dsexample->blur_objects) {
+      if (custominfer->blur_objects) {
       /* Cache the mapped data for device access */
         NvBufSurfaceSyncForDevice (surface, frame_meta->batch_id, 0);
 
@@ -823,13 +823,13 @@ gst_dsexample_transform_ip (GstBaseTransform * btrans, GstBuffer * inbuf)
         /* Use openCV to remove padding and convert RGBA to BGR. Can be skipped if
         * algorithm can handle padded RGBA data. */
 #if (CV_MAJOR_VERSION >= 4)
-        cv::cvtColor (in_mat, *dsexample->cvmat, cv::COLOR_RGBA2BGR);
+        cv::cvtColor (in_mat, *custominfer->cvmat, cv::COLOR_RGBA2BGR);
 #else
-        cv::cvtColor (in_mat, *dsexample->cvmat, CV_RGBA2BGR);
+        cv::cvtColor (in_mat, *custominfer->cvmat, CV_RGBA2BGR);
 #endif
         /* used to dump the converted mat to files for debug */
         static guint cnt = 0;
-        cv::imwrite("out_" + std::to_string (cnt) + ".jpeg", *dsexample->cvmat);
+        cv::imwrite("out_" + std::to_string (cnt) + ".jpeg", *custominfer->cvmat);
         cnt++;
 #endif
       }
@@ -846,13 +846,13 @@ error:
  * Attach metadata for the full frame. We will be adding a new metadata.
  */
 static void
-attach_metadata_full_frame (GstDsExample * dsexample, NvDsFrameMeta *frame_meta,
+attach_metadata_full_frame (GstDsExample * custominfer, NvDsFrameMeta *frame_meta,
     gdouble scale_ratio, DsExampleOutput * output, guint batch_id)
 {
   NvDsBatchMeta *batch_meta = frame_meta->base_meta.batch_meta;
   NvDsObjectMeta *object_meta = NULL;
   static gchar font_name[] = "Serif";
-  GST_DEBUG_OBJECT (dsexample, "Attaching metadata %d\n", output->numObjects);
+  GST_DEBUG_OBJECT (custominfer, "Attaching metadata %d\n", output->numObjects);
 
   for (gint i = 0; i < output->numObjects; i++) {
     DsExampleObject *obj = &output->object[i];
@@ -881,7 +881,7 @@ attach_metadata_full_frame (GstDsExample * dsexample, NvDsFrameMeta *frame_meta,
     rect_params.top /= scale_ratio;
     rect_params.width /= scale_ratio;
     rect_params.height /= scale_ratio;
-    GST_DEBUG_OBJECT (dsexample, "Attaching rect%d of batch%u"
+    GST_DEBUG_OBJECT (custominfer, "Attaching rect%d of batch%u"
         "  left->%f top->%f width->%f"
         " height->%f label->%s\n", i, batch_id, rect_params.left,
         rect_params.top, rect_params.width, rect_params.height, obj->label);
@@ -913,7 +913,7 @@ attach_metadata_full_frame (GstDsExample * dsexample, NvDsFrameMeta *frame_meta,
  * We assume only one label per object is generated
  */
 static void
-attach_metadata_object (GstDsExample * dsexample, NvDsObjectMeta * obj_meta,
+attach_metadata_object (GstDsExample * custominfer, NvDsObjectMeta * obj_meta,
     DsExampleOutput * output)
 {
   if (output->numObjects == 0)
@@ -923,7 +923,7 @@ attach_metadata_object (GstDsExample * dsexample, NvDsObjectMeta * obj_meta,
   NvDsClassifierMeta *classifier_meta =
     nvds_acquire_classifier_meta_from_pool (batch_meta);
 
-  classifier_meta->unique_component_id = dsexample->unique_id;
+  classifier_meta->unique_component_id = custominfer->unique_id;
 
   NvDsLabelInfo *label_info =
     nvds_acquire_label_info_meta_from_pool (batch_meta);
@@ -965,16 +965,16 @@ attach_metadata_object (GstDsExample * dsexample, NvDsObjectMeta * obj_meta,
  * Boiler plate for registering a plugin and an element.
  */
 static gboolean
-dsexample_plugin_init (GstPlugin * plugin)
+custominfer_plugin_init (GstPlugin * plugin)
 {
-  GST_DEBUG_CATEGORY_INIT (gst_dsexample_debug, "dsexample", 0,
-      "dsexample plugin");
+  GST_DEBUG_CATEGORY_INIT (gst_custominfer_debug, "custominfer", 0,
+      "custominfer plugin");
 
-  return gst_element_register (plugin, "dsexample", GST_RANK_PRIMARY,
+  return gst_element_register (plugin, "custominfer", GST_RANK_PRIMARY,
       GST_TYPE_DSEXAMPLE);
 }
 
 GST_PLUGIN_DEFINE (GST_VERSION_MAJOR,
     GST_VERSION_MINOR,
-    nvdsgst_dsexample,
-    DESCRIPTION, dsexample_plugin_init, "5.0", LICENSE, BINARY_PACKAGE, URL)
+    nvdsgst_custominfer,
+    DESCRIPTION, custominfer_plugin_init, "5.0", LICENSE, BINARY_PACKAGE, URL)

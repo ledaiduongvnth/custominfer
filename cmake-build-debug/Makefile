@@ -111,71 +111,71 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named gst_dsexample_sources2
+# Target rules for targets named gst_custominfer_sources2
 
 # Build rule for target.
-gst_dsexample_sources2: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 gst_dsexample_sources2
-.PHONY : gst_dsexample_sources2
+gst_custominfer_sources2: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 gst_custominfer_sources2
+.PHONY : gst_custominfer_sources2
 
 # fast build rule for target.
-gst_dsexample_sources2/fast:
-	$(MAKE) -f CMakeFiles/gst_dsexample_sources2.dir/build.make CMakeFiles/gst_dsexample_sources2.dir/build
-.PHONY : gst_dsexample_sources2/fast
+gst_custominfer_sources2/fast:
+	$(MAKE) -f CMakeFiles/gst_custominfer_sources2.dir/build.make CMakeFiles/gst_custominfer_sources2.dir/build
+.PHONY : gst_custominfer_sources2/fast
 
-dsexample_lib/dsexample_lib.o: dsexample_lib/dsexample_lib.c.o
+custominfer_lib/custominfer_lib.o: custominfer_lib/custominfer_lib.c.o
 
-.PHONY : dsexample_lib/dsexample_lib.o
-
-# target to build an object file
-dsexample_lib/dsexample_lib.c.o:
-	$(MAKE) -f CMakeFiles/gst_dsexample_sources2.dir/build.make CMakeFiles/gst_dsexample_sources2.dir/dsexample_lib/dsexample_lib.c.o
-.PHONY : dsexample_lib/dsexample_lib.c.o
-
-dsexample_lib/dsexample_lib.i: dsexample_lib/dsexample_lib.c.i
-
-.PHONY : dsexample_lib/dsexample_lib.i
-
-# target to preprocess a source file
-dsexample_lib/dsexample_lib.c.i:
-	$(MAKE) -f CMakeFiles/gst_dsexample_sources2.dir/build.make CMakeFiles/gst_dsexample_sources2.dir/dsexample_lib/dsexample_lib.c.i
-.PHONY : dsexample_lib/dsexample_lib.c.i
-
-dsexample_lib/dsexample_lib.s: dsexample_lib/dsexample_lib.c.s
-
-.PHONY : dsexample_lib/dsexample_lib.s
-
-# target to generate assembly for a file
-dsexample_lib/dsexample_lib.c.s:
-	$(MAKE) -f CMakeFiles/gst_dsexample_sources2.dir/build.make CMakeFiles/gst_dsexample_sources2.dir/dsexample_lib/dsexample_lib.c.s
-.PHONY : dsexample_lib/dsexample_lib.c.s
-
-gstdsexample.o: gstdsexample.cpp.o
-
-.PHONY : gstdsexample.o
+.PHONY : custominfer_lib/custominfer_lib.o
 
 # target to build an object file
-gstdsexample.cpp.o:
-	$(MAKE) -f CMakeFiles/gst_dsexample_sources2.dir/build.make CMakeFiles/gst_dsexample_sources2.dir/gstdsexample.cpp.o
-.PHONY : gstdsexample.cpp.o
+custominfer_lib/custominfer_lib.c.o:
+	$(MAKE) -f CMakeFiles/gst_custominfer_sources2.dir/build.make CMakeFiles/gst_custominfer_sources2.dir/custominfer_lib/custominfer_lib.c.o
+.PHONY : custominfer_lib/custominfer_lib.c.o
 
-gstdsexample.i: gstdsexample.cpp.i
+custominfer_lib/custominfer_lib.i: custominfer_lib/custominfer_lib.c.i
 
-.PHONY : gstdsexample.i
+.PHONY : custominfer_lib/custominfer_lib.i
 
 # target to preprocess a source file
-gstdsexample.cpp.i:
-	$(MAKE) -f CMakeFiles/gst_dsexample_sources2.dir/build.make CMakeFiles/gst_dsexample_sources2.dir/gstdsexample.cpp.i
-.PHONY : gstdsexample.cpp.i
+custominfer_lib/custominfer_lib.c.i:
+	$(MAKE) -f CMakeFiles/gst_custominfer_sources2.dir/build.make CMakeFiles/gst_custominfer_sources2.dir/custominfer_lib/custominfer_lib.c.i
+.PHONY : custominfer_lib/custominfer_lib.c.i
 
-gstdsexample.s: gstdsexample.cpp.s
+custominfer_lib/custominfer_lib.s: custominfer_lib/custominfer_lib.c.s
 
-.PHONY : gstdsexample.s
+.PHONY : custominfer_lib/custominfer_lib.s
 
 # target to generate assembly for a file
-gstdsexample.cpp.s:
-	$(MAKE) -f CMakeFiles/gst_dsexample_sources2.dir/build.make CMakeFiles/gst_dsexample_sources2.dir/gstdsexample.cpp.s
-.PHONY : gstdsexample.cpp.s
+custominfer_lib/custominfer_lib.c.s:
+	$(MAKE) -f CMakeFiles/gst_custominfer_sources2.dir/build.make CMakeFiles/gst_custominfer_sources2.dir/custominfer_lib/custominfer_lib.c.s
+.PHONY : custominfer_lib/custominfer_lib.c.s
+
+gstcustominfer.o: gstcustominfer.cpp.o
+
+.PHONY : gstcustominfer.o
+
+# target to build an object file
+gstcustominfer.cpp.o:
+	$(MAKE) -f CMakeFiles/gst_custominfer_sources2.dir/build.make CMakeFiles/gst_custominfer_sources2.dir/gstcustominfer.cpp.o
+.PHONY : gstcustominfer.cpp.o
+
+gstcustominfer.i: gstcustominfer.cpp.i
+
+.PHONY : gstcustominfer.i
+
+# target to preprocess a source file
+gstcustominfer.cpp.i:
+	$(MAKE) -f CMakeFiles/gst_custominfer_sources2.dir/build.make CMakeFiles/gst_custominfer_sources2.dir/gstcustominfer.cpp.i
+.PHONY : gstcustominfer.cpp.i
+
+gstcustominfer.s: gstcustominfer.cpp.s
+
+.PHONY : gstcustominfer.s
+
+# target to generate assembly for a file
+gstcustominfer.cpp.s:
+	$(MAKE) -f CMakeFiles/gst_custominfer_sources2.dir/build.make CMakeFiles/gst_custominfer_sources2.dir/gstcustominfer.cpp.s
+.PHONY : gstcustominfer.cpp.s
 
 # Help Target
 help:
@@ -184,14 +184,14 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... rebuild_cache"
-	@echo "... gst_dsexample_sources2"
+	@echo "... gst_custominfer_sources2"
 	@echo "... edit_cache"
-	@echo "... dsexample_lib/dsexample_lib.o"
-	@echo "... dsexample_lib/dsexample_lib.i"
-	@echo "... dsexample_lib/dsexample_lib.s"
-	@echo "... gstdsexample.o"
-	@echo "... gstdsexample.i"
-	@echo "... gstdsexample.s"
+	@echo "... custominfer_lib/custominfer_lib.o"
+	@echo "... custominfer_lib/custominfer_lib.i"
+	@echo "... custominfer_lib/custominfer_lib.s"
+	@echo "... gstcustominfer.o"
+	@echo "... gstcustominfer.i"
+	@echo "... gstcustominfer.s"
 .PHONY : help
 
 

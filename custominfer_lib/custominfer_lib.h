@@ -30,7 +30,7 @@ extern "C" {
 
 typedef struct DsExampleCtx DsExampleCtx;
 
-// Init parameters structure as input, required for instantiating dsexample_lib
+// Init parameters structure as input, required for instantiating custominfer_lib
 typedef struct
 {
   // Width at which frame/object will be scaled

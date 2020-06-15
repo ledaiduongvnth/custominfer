@@ -49,66 +49,66 @@ CMAKE_SOURCE_DIR = /mnt/hdd/CLionProjects/Dgst-dsxexample
 CMAKE_BINARY_DIR = /mnt/hdd/CLionProjects/Dgst-dsxexample/cmake-build-debug
 
 # Include any dependencies generated for this target.
-include CMakeFiles/gst_dsexample_sources2.dir/depend.make
+include CMakeFiles/gst_custominfer_sources2.dir/depend.make
 
 # Include the progress variables for this target.
-include CMakeFiles/gst_dsexample_sources2.dir/progress.make
+include CMakeFiles/gst_custominfer_sources2.dir/progress.make
 
 # Include the compile flags for this target's objects.
-include CMakeFiles/gst_dsexample_sources2.dir/flags.make
+include CMakeFiles/gst_custominfer_sources2.dir/flags.make
 
-CMakeFiles/gst_dsexample_sources2.dir/dsexample_lib/dsexample_lib.c.o: CMakeFiles/gst_dsexample_sources2.dir/flags.make
-CMakeFiles/gst_dsexample_sources2.dir/dsexample_lib/dsexample_lib.c.o: ../dsexample_lib/dsexample_lib.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/hdd/CLionProjects/Dgst-dsxexample/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/gst_dsexample_sources2.dir/dsexample_lib/dsexample_lib.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/gst_dsexample_sources2.dir/dsexample_lib/dsexample_lib.c.o   -c /mnt/hdd/CLionProjects/Dgst-dsxexample/dsexample_lib/dsexample_lib.c
+CMakeFiles/gst_custominfer_sources2.dir/custominfer_lib/custominfer_lib.c.o: CMakeFiles/gst_custominfer_sources2.dir/flags.make
+CMakeFiles/gst_custominfer_sources2.dir/custominfer_lib/custominfer_lib.c.o: ../custominfer_lib/custominfer_lib.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/hdd/CLionProjects/Dgst-dsxexample/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/gst_custominfer_sources2.dir/custominfer_lib/custominfer_lib.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/gst_custominfer_sources2.dir/custominfer_lib/custominfer_lib.c.o   -c /mnt/hdd/CLionProjects/Dgst-dsxexample/custominfer_lib/custominfer_lib.c
 
-CMakeFiles/gst_dsexample_sources2.dir/dsexample_lib/dsexample_lib.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/gst_dsexample_sources2.dir/dsexample_lib/dsexample_lib.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/hdd/CLionProjects/Dgst-dsxexample/dsexample_lib/dsexample_lib.c > CMakeFiles/gst_dsexample_sources2.dir/dsexample_lib/dsexample_lib.c.i
+CMakeFiles/gst_custominfer_sources2.dir/custominfer_lib/custominfer_lib.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/gst_custominfer_sources2.dir/custominfer_lib/custominfer_lib.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/hdd/CLionProjects/Dgst-dsxexample/custominfer_lib/custominfer_lib.c > CMakeFiles/gst_custominfer_sources2.dir/custominfer_lib/custominfer_lib.c.i
 
-CMakeFiles/gst_dsexample_sources2.dir/dsexample_lib/dsexample_lib.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/gst_dsexample_sources2.dir/dsexample_lib/dsexample_lib.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/hdd/CLionProjects/Dgst-dsxexample/dsexample_lib/dsexample_lib.c -o CMakeFiles/gst_dsexample_sources2.dir/dsexample_lib/dsexample_lib.c.s
+CMakeFiles/gst_custominfer_sources2.dir/custominfer_lib/custominfer_lib.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/gst_custominfer_sources2.dir/custominfer_lib/custominfer_lib.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/hdd/CLionProjects/Dgst-dsxexample/custominfer_lib/custominfer_lib.c -o CMakeFiles/gst_custominfer_sources2.dir/custominfer_lib/custominfer_lib.c.s
 
-CMakeFiles/gst_dsexample_sources2.dir/gstdsexample.cpp.o: CMakeFiles/gst_dsexample_sources2.dir/flags.make
-CMakeFiles/gst_dsexample_sources2.dir/gstdsexample.cpp.o: ../gstdsexample.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/hdd/CLionProjects/Dgst-dsxexample/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/gst_dsexample_sources2.dir/gstdsexample.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/gst_dsexample_sources2.dir/gstdsexample.cpp.o -c /mnt/hdd/CLionProjects/Dgst-dsxexample/gstdsexample.cpp
+CMakeFiles/gst_custominfer_sources2.dir/gstcustominfer.cpp.o: CMakeFiles/gst_custominfer_sources2.dir/flags.make
+CMakeFiles/gst_custominfer_sources2.dir/gstcustominfer.cpp.o: ../gstcustominfer.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/hdd/CLionProjects/Dgst-dsxexample/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/gst_custominfer_sources2.dir/gstcustominfer.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/gst_custominfer_sources2.dir/gstcustominfer.cpp.o -c /mnt/hdd/CLionProjects/Dgst-dsxexample/gstcustominfer.cpp
 
-CMakeFiles/gst_dsexample_sources2.dir/gstdsexample.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/gst_dsexample_sources2.dir/gstdsexample.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/hdd/CLionProjects/Dgst-dsxexample/gstdsexample.cpp > CMakeFiles/gst_dsexample_sources2.dir/gstdsexample.cpp.i
+CMakeFiles/gst_custominfer_sources2.dir/gstcustominfer.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/gst_custominfer_sources2.dir/gstcustominfer.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/hdd/CLionProjects/Dgst-dsxexample/gstcustominfer.cpp > CMakeFiles/gst_custominfer_sources2.dir/gstcustominfer.cpp.i
 
-CMakeFiles/gst_dsexample_sources2.dir/gstdsexample.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/gst_dsexample_sources2.dir/gstdsexample.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/hdd/CLionProjects/Dgst-dsxexample/gstdsexample.cpp -o CMakeFiles/gst_dsexample_sources2.dir/gstdsexample.cpp.s
+CMakeFiles/gst_custominfer_sources2.dir/gstcustominfer.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/gst_custominfer_sources2.dir/gstcustominfer.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/hdd/CLionProjects/Dgst-dsxexample/gstcustominfer.cpp -o CMakeFiles/gst_custominfer_sources2.dir/gstcustominfer.cpp.s
 
-# Object files for target gst_dsexample_sources2
-gst_dsexample_sources2_OBJECTS = \
-"CMakeFiles/gst_dsexample_sources2.dir/dsexample_lib/dsexample_lib.c.o" \
-"CMakeFiles/gst_dsexample_sources2.dir/gstdsexample.cpp.o"
+# Object files for target gst_custominfer_sources2
+gst_custominfer_sources2_OBJECTS = \
+"CMakeFiles/gst_custominfer_sources2.dir/custominfer_lib/custominfer_lib.c.o" \
+"CMakeFiles/gst_custominfer_sources2.dir/gstcustominfer.cpp.o"
 
-# External object files for target gst_dsexample_sources2
-gst_dsexample_sources2_EXTERNAL_OBJECTS =
+# External object files for target gst_custominfer_sources2
+gst_custominfer_sources2_EXTERNAL_OBJECTS =
 
-libgst_dsexample_sources2.a: CMakeFiles/gst_dsexample_sources2.dir/dsexample_lib/dsexample_lib.c.o
-libgst_dsexample_sources2.a: CMakeFiles/gst_dsexample_sources2.dir/gstdsexample.cpp.o
-libgst_dsexample_sources2.a: CMakeFiles/gst_dsexample_sources2.dir/build.make
-libgst_dsexample_sources2.a: CMakeFiles/gst_dsexample_sources2.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/mnt/hdd/CLionProjects/Dgst-dsxexample/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX static library libgst_dsexample_sources2.a"
-	$(CMAKE_COMMAND) -P CMakeFiles/gst_dsexample_sources2.dir/cmake_clean_target.cmake
-	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/gst_dsexample_sources2.dir/link.txt --verbose=$(VERBOSE)
+libgst_custominfer_sources2.a: CMakeFiles/gst_custominfer_sources2.dir/custominfer_lib/custominfer_lib.c.o
+libgst_custominfer_sources2.a: CMakeFiles/gst_custominfer_sources2.dir/gstcustominfer.cpp.o
+libgst_custominfer_sources2.a: CMakeFiles/gst_custominfer_sources2.dir/build.make
+libgst_custominfer_sources2.a: CMakeFiles/gst_custominfer_sources2.dir/link.txt
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/mnt/hdd/CLionProjects/Dgst-dsxexample/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX static library libgst_custominfer_sources2.a"
+	$(CMAKE_COMMAND) -P CMakeFiles/gst_custominfer_sources2.dir/cmake_clean_target.cmake
+	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/gst_custominfer_sources2.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
-CMakeFiles/gst_dsexample_sources2.dir/build: libgst_dsexample_sources2.a
+CMakeFiles/gst_custominfer_sources2.dir/build: libgst_custominfer_sources2.a
 
-.PHONY : CMakeFiles/gst_dsexample_sources2.dir/build
+.PHONY : CMakeFiles/gst_custominfer_sources2.dir/build
 
-CMakeFiles/gst_dsexample_sources2.dir/clean:
-	$(CMAKE_COMMAND) -P CMakeFiles/gst_dsexample_sources2.dir/cmake_clean.cmake
-.PHONY : CMakeFiles/gst_dsexample_sources2.dir/clean
+CMakeFiles/gst_custominfer_sources2.dir/clean:
+	$(CMAKE_COMMAND) -P CMakeFiles/gst_custominfer_sources2.dir/cmake_clean.cmake
+.PHONY : CMakeFiles/gst_custominfer_sources2.dir/clean
 
-CMakeFiles/gst_dsexample_sources2.dir/depend:
-	cd /mnt/hdd/CLionProjects/Dgst-dsxexample/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /mnt/hdd/CLionProjects/Dgst-dsxexample /mnt/hdd/CLionProjects/Dgst-dsxexample /mnt/hdd/CLionProjects/Dgst-dsxexample/cmake-build-debug /mnt/hdd/CLionProjects/Dgst-dsxexample/cmake-build-debug /mnt/hdd/CLionProjects/Dgst-dsxexample/cmake-build-debug/CMakeFiles/gst_dsexample_sources2.dir/DependInfo.cmake --color=$(COLOR)
-.PHONY : CMakeFiles/gst_dsexample_sources2.dir/depend
+CMakeFiles/gst_custominfer_sources2.dir/depend:
+	cd /mnt/hdd/CLionProjects/Dgst-dsxexample/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /mnt/hdd/CLionProjects/Dgst-dsxexample /mnt/hdd/CLionProjects/Dgst-dsxexample /mnt/hdd/CLionProjects/Dgst-dsxexample/cmake-build-debug /mnt/hdd/CLionProjects/Dgst-dsxexample/cmake-build-debug /mnt/hdd/CLionProjects/Dgst-dsxexample/cmake-build-debug/CMakeFiles/gst_custominfer_sources2.dir/DependInfo.cmake --color=$(COLOR)
+.PHONY : CMakeFiles/gst_custominfer_sources2.dir/depend
 
