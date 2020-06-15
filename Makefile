@@ -46,7 +46,9 @@ DEP_FILES-=$(DEP)
 
 CFLAGS+= -fPIC -DDS_VERSION=\"5.0.0\" \
 	 -I /usr/local/cuda-$(CUDA_VER)/include \
-	 -I ../../includes
+	 -I ../../includes \
+	 -I /opt/nvidia/deepstream/deepstream-5.0/sources/includes
+
 
 GST_INSTALL_DIR?=/opt/nvidia/deepstream/deepstream-$(NVDS_VERSION)/lib/gst-plugins/
 LIB_INSTALL_DIR?=/opt/nvidia/deepstream/deepstream-$(NVDS_VERSION)/lib/
@@ -62,7 +64,7 @@ OBJS:= $(SRCS:.cpp=.o)
 ifeq ($(TARGET_DEVICE),aarch64)
 	PKGS:= gstreamer-1.0 gstreamer-base-1.0 gstreamer-video-1.0 opencv4
 else
-	PKGS:= gstreamer-1.0 gstreamer-base-1.0 gstreamer-video-1.0 opencv
+	PKGS:= gstreamer-1.0 gstreamer-base-1.0 gstreamer-video-1.0 opencv4
 endif
 
 CFLAGS+=$(shell pkg-config --cflags $(PKGS))
