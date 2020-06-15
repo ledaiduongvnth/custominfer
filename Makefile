@@ -22,7 +22,7 @@
 #enable this flag to use optimized custominfer plugin
 #it can also be exported from command line
 USE_OPTIMIZED_DSEXAMPLE?=0
-CUDA_VER?=
+CUDA_VER=10.2
 ifeq ($(CUDA_VER),)
   $(error "CUDA_VER is not set")
 endif
