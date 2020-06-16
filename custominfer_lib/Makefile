@@ -21,5 +21,5 @@
 #################################################################################
 
 all:
-	gcc -ggdb -c -o custominfer_lib.o -fPIC custominfer_lib.c
+	gcc -ggdb -c -o custominfer_lib.o -fPIC custominfer_lib.cpp
 	ar rcs libcustominfer.a custominfer_lib.o

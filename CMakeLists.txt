@@ -53,7 +53,7 @@ link_libraries(
 set (CMAKE_SHARED_LINKER_FLAGS “${CMAKE_SHARED_LINKER_FLAGS} -L/usr/lib/aarch64-linux-gnu/tegra -lnvbuf_utils -lgstnvivameta -Wl,-no-undefined -L custominfer_lib -lcustominfer -lEGL”)
 
 add_library(gst_custominfer_sources2
-        custominfer_lib/custominfer_lib.c
+        custominfer_lib/custominfer_lib.cpp
         custominfer_lib/custominfer_lib.h
         gstcustominfer.cpp
         gstcustominfer.h)
