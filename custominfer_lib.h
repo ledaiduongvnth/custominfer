@@ -22,12 +22,10 @@
 
 #ifndef __DSEXAMPLE_LIB__
 #define __DSEXAMPLE_LIB__
-
 #define MAX_LABEL_SIZE 128
-#ifdef __cplusplus
-extern "C" {
 #endif
 
+#include "opencv2/opencv.hpp"
 typedef struct DsExampleCtx DsExampleCtx;
 
 // Init parameters structure as input, required for instantiating custominfer_lib
@@ -62,13 +60,8 @@ typedef struct
 DsExampleCtx * DsExampleCtxInit (DsExampleInitParams *init_params);
 
 // Dequeue processed output
-DsExampleOutput *DsExampleProcess (DsExampleCtx *ctx, unsigned char *data);
+DsExampleOutput *DsExampleProcess (DsExampleCtx *ctx, cv::Mat image);
 
 // Deinitialize library context
 void DsExampleCtxDeinit (DsExampleCtx *ctx);
 
-#ifdef __cplusplus
-}
-#endif
-
-#endif

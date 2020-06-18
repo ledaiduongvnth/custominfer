@@ -32,7 +32,7 @@ CXX:= g++
 ifeq ($(USE_OPTIMIZED_DSEXAMPLE),1)
   SRCS:= gstcustominfer_optimized.cpp
 else
-  SRCS:= gstcustominfer.cpp
+  SRCS:= gstcustominfer.cpp custominfer_lib.cpp
 endif
 
 INCS:= $(wildcard *.h)
@@ -40,25 +40,28 @@ LIB:=libnvdsgst_custominfer.so
 
 NVDS_VERSION:=5.0
 
-DEP:=custominfer_lib/libcustominfer.a
-DEP_FILES:=$(wildcard custominfer_lib/custominfer_lib.* )
-DEP_FILES-=$(DEP)
+#DEP:=custominfer_lib/libcustominfer.a
+#DEP_FILES:=$(wildcard custominfer_lib/custominfer_lib.* )
+#DEP_FILES-=$(DEP)
 
 CFLAGS+= -fPIC -DDS_VERSION=\"5.0.0\" \
 	 -I /usr/local/cuda-$(CUDA_VER)/include \
 	 -I ../../includes \
-	 -I /opt/nvidia/deepstream/deepstream-5.0/sources/includes
+	 -I /opt/nvidia/deepstream/deepstream-5.0/sources/includes \
+	 -I/usr/include/opencv4 \
+	 -I/mnt/hdd/CLionProjects/arcface
 
 
 GST_INSTALL_DIR?=/opt/nvidia/deepstream/deepstream-$(NVDS_VERSION)/lib/gst-plugins/
 LIB_INSTALL_DIR?=/opt/nvidia/deepstream/deepstream-$(NVDS_VERSION)/lib/
 
 LIBS := -shared -Wl,-no-undefined \
-	-L custominfer_lib -lcustominfer \
-	-L/usr/local/cuda-$(CUDA_VER)/lib64/ -lcudart -ldl \
+	-L custominfer_lib \
+	-L/usr/local/cuda-$(CUDA_VER)/lib64/ -lcudart -ldl -larcface \
 	-lnppc -lnppig -lnpps -lnppicc -lnppidei \
 	-L$(LIB_INSTALL_DIR) -lnvdsgst_helper -lnvdsgst_meta -lnvds_meta -lnvbufsurface -lnvbufsurftransform\
-	-Wl,-rpath,$(LIB_INSTALL_DIR)
+	-Wl,-rpath,$(LIB_INSTALL_DIR) \
+	-L/opt/nvidia/deepstream/deepstream-5.0/lib
 
 OBJS:= $(SRCS:.cpp=.o)
 ifeq ($(TARGET_DEVICE),aarch64)

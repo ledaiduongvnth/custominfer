@@ -27,6 +27,7 @@ include_directories(
         {GSTREAMER-AUDIO_INCLUDE_DIRS} {GSTREAMER-PBUTILS_INCLUDE_DIRS}
         {GSTREAMER-FFT_INCLUDE_DIRS} {GSTREAMER-VIDEO_INCLUDE_DIRS}
         {GSTREAMER-BASE_INCLUDE_DIRS} {CMAKE_CURRENT_SOURCE_DIR}
+        /mnt/hdd/CLionProjects/arcface
 
 )
 link_directories(
@@ -53,7 +54,7 @@ link_libraries(
 set (CMAKE_SHARED_LINKER_FLAGS “${CMAKE_SHARED_LINKER_FLAGS} -L/usr/lib/aarch64-linux-gnu/tegra -lnvbuf_utils -lgstnvivameta -Wl,-no-undefined -L custominfer_lib -lcustominfer -lEGL”)
 
 add_library(gst_custominfer_sources2
-        custominfer_lib/custominfer_lib.cpp
-        custominfer_lib/custominfer_lib.h
+        custominfer_lib.cpp
+        custominfer_lib.h
         gstcustominfer.cpp
         gstcustominfer.h)

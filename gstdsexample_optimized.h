@@ -36,7 +36,7 @@
 #include "nvbufsurftransform.h"
 #include "gst-nvquery.h"
 #include "gstnvdsmeta.h"
-#include "custominfer_lib/custominfer_lib.h"
+#include "custominfer_lib.h"
 #include "nvtx3/nvToolsExt.h"
 
 #include <condition_variable>

@@ -36,7 +36,7 @@
 #include "nvbufsurftransform.h"
 #include "gst-nvquery.h"
 #include "gstnvdsmeta.h"
-#include "custominfer_lib/custominfer_lib.h"
+#include "custominfer_lib.h"
 
 /* Package and library details required for plugin_init */
 #define PACKAGE "custominfer"

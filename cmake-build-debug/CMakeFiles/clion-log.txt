@@ -1,16 +1,4 @@
-/home/d/Downloads/clion-2019.3.6/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /mnt/hdd/CLionProjects/Dgst-dsxexample
+/home/d/clion-2020.1.2/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /mnt/hdd/CLionProjects/Dgst-dsxexample
 -- Configuring done
-CMake Error at CMakeLists.txt:55 (add_library):
-  Cannot find source file:
-
-    custominfer_lib/custominfer_lib.cpp
-
-  Tried extensions .c .C .c++ .cc .cpp .cxx .cu .m .M .mm .h .hh .h++ .hm
-  .hpp .hxx .in .txx
-
-
-CMake Error at CMakeLists.txt:55 (add_library):
-  No SOURCES given to target: gst_custominfer_sources2
-
-
-CMake Generate step failed.  Build files cannot be regenerated correctly.
+-- Generating done
+-- Build files have been written to: /mnt/hdd/CLionProjects/Dgst-dsxexample/cmake-build-debug

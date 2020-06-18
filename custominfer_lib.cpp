@@ -23,10 +23,16 @@
 #include "custominfer_lib.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include "arcfacenet.h"
+#include "aligner.h"
+
+
 
 struct DsExampleCtx
 {
     DsExampleInitParams initParams;
+    arcfacenet *net;
+    mirror::Aligner aligner;
 };
 
 DsExampleCtx *
@@ -34,23 +40,36 @@ DsExampleCtxInit (DsExampleInitParams * initParams)
 {
     DsExampleCtx *ctx = (DsExampleCtx *) calloc (1, sizeof (DsExampleCtx));
     ctx->initParams = *initParams;
+    ctx->net = arcfacenet::Create();
     return ctx;
 }
 
 // In case of an actual processing library, processing on data wil be completed
 // in this function and output will be returned
 DsExampleOutput *
-DsExampleProcess (DsExampleCtx * ctx, unsigned char *data)
+DsExampleProcess (DsExampleCtx * ctx, cv::Mat image)
 {
-    DsExampleOutput *out =
-        (DsExampleOutput*)calloc (1, sizeof (DsExampleOutput));
-
-    if (data != NULL)
+    if (image.data != NULL)
     {
-        // Process your data here
+//        cv::Mat originImage = cv::imread("/home/d/Pictures/437886.jpg");
+        cv::Point2f p1 = cv::Point(238, 131);
+        cv::Point2f p2 = cv::Point(271, 134);
+        cv::Point2f p3 = cv::Point(253, 152);
+        cv::Point2f p4 = cv::Point(237, 163);
+        cv::Point2f p5 = cv::Point(266, 165);
+        std::vector<cv::Point2f> landmarks{p1, p2, p3, p4, p5};
+        cv::Mat faceAligned;
+        printf("image size 1:%d\n", image.rows);
+        printf("image size 2:%d\n", image.cols);
+        ctx->aligner.AlignFace(image, landmarks, &faceAligned);
+        cv::imwrite("/mnt/hdd/CLionProjects/Dgst-dsxexample/test.jpg", faceAligned);
+
+//        cv::Mat img;
+//        cv::resize(image,img,cv::Size(112,112));
+        ctx->net->Detect(faceAligned);
     }
-    // Fill output structure using processed output
-    // Here, we fake some detected objects and labels
+    DsExampleOutput *out = (DsExampleOutput*)calloc (1, sizeof (DsExampleOutput));
+
     if (ctx->initParams.fullFrame)
     {
         out->numObjects = 2;

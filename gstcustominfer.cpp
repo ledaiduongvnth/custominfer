@@ -66,8 +66,8 @@ enum
 
 /* Default values for properties */
 #define DEFAULT_UNIQUE_ID 15
-#define DEFAULT_PROCESSING_WIDTH 640
-#define DEFAULT_PROCESSING_HEIGHT 480
+#define DEFAULT_PROCESSING_WIDTH 1280
+#define DEFAULT_PROCESSING_HEIGHT 720
 #define DEFAULT_PROCESS_FULL_FRAME TRUE
 #define DEFAULT_BLUR_OBJECTS FALSE
 #define DEFAULT_GPU_ID 0
@@ -718,9 +718,7 @@ gst_custominfer_transform_ip (GstBaseTransform * btrans, GstBuffer * inbuf)
       }
 
       /* Process to get the output */
-      output =
-          DsExampleProcess (custominfer->custominferlib_ctx,
-          custominfer->cvmat->data);
+      output = DsExampleProcess (custominfer->custominferlib_ctx, *custominfer->cvmat);
       /* Attach the metadata for the full frame */
       attach_metadata_full_frame (custominfer, frame_meta, scale_ratio, output, i);
       i++;
@@ -807,7 +805,7 @@ gst_custominfer_transform_ip (GstBaseTransform * btrans, GstBuffer * inbuf)
 
         /* Process the object crop to obtain label */
         output = DsExampleProcess (custominfer->custominferlib_ctx,
-            custominfer->cvmat->data);
+            *custominfer->cvmat);
 
         /* Attach labels for the object */
         attach_metadata_object (custominfer, obj_meta, output);
