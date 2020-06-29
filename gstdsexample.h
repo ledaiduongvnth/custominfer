@@ -37,7 +37,7 @@
 #include "gst-nvquery.h"
 #include "gstnvdsmeta.h"
 #include "dsexample_lib/dsexample_lib.h"
-
+#include "aligner.h"
 /* Package and library details required for plugin_init */
 #define PACKAGE "dsexample"
 #define VERSION "1.0"

@@ -30,9 +30,9 @@ TARGET_DEVICE = $(shell gcc -dumpmachine | cut -f1 -d -)
 CXX:= g++
 
 ifeq ($(USE_OPTIMIZED_DSEXAMPLE),1)
-  SRCS:= gstdsexample_optimized.cpp
+  SRCS:= gstdsexample_optimized.cpp aligner.cpp
 else
-  SRCS:= gstdsexample.cpp
+  SRCS:= gstdsexample.cpp aligner.cpp
 endif
 
 INCS:= $(wildcard *.h)
