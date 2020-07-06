@@ -583,56 +583,22 @@ gst_dsexample_transform_ip(GstBaseTransform *btrans, GstBuffer *inbuf) {
             if (dsexample->blur_objects) {
                 NvBufSurfaceSyncForDevice(surface, frame_meta->batch_id, 0);
             }
-            attach_metadata_full_frame(frame_meta, faceIndex);
+            int k = 0;
+            for (NvDsMetaList *l_obj = frame_meta->obj_meta_list; l_obj != NULL; l_obj = l_obj->next) {
+                NvDsObjectMeta *object_meta = (NvDsObjectMeta *) l_obj->data;
+                NvOSD_RectParams &rect_params = object_meta->rect_params;
+                rect_params.left = k*112;
+                rect_params.top = 0;
+                rect_params.width = 112;
+                rect_params.height = 112;
+                k = k + 1;
+            }
         }
     }
     flow_ret = GST_FLOW_OK;
     error:
     gst_buffer_unmap(inbuf, &in_map_info);
     return flow_ret;
-}
-/**
- * Attach metadata for the full frame. We will be adding a new metadata.
- */
-static void
-attach_metadata_full_frame(NvDsFrameMeta *frame_meta, int numberObjects) {
-    NvDsBatchMeta *batch_meta = frame_meta->base_meta.batch_meta;
-    NvDsObjectMeta *object_meta = NULL;
-    for (gint i = 0; i < numberObjects; i++) {
-        object_meta = nvds_acquire_obj_meta_from_pool(batch_meta);
-        guint unique_id = 1;
-        object_meta->unique_component_id = unique_id;
-        object_meta->object_id = UNTRACKED_OBJECT_ID;
-        object_meta->confidence = 0.0;
-        NvOSD_RectParams &rect_params = object_meta->rect_params;
-        NvOSD_TextParams &text_params = object_meta->text_params;
-
-        /* Assign bounding box coordinates */
-        rect_params.left = i*112;
-        rect_params.top = 0;
-        rect_params.width = 112;
-        rect_params.height = 112;
-
-        /* Border of width 3. */
-        rect_params.border_width = 3;
-        rect_params.has_bg_color = 0;
-        rect_params.border_color = (NvOSD_ColorParams) {1, 0, 0, 1};
-
-        /* display_text requires heap allocated memory. */
-        /* Display text above the left top corner of the object. */
-        text_params.x_offset = rect_params.left;
-        text_params.y_offset = rect_params.top - 10;
-        /* Set black background for the text. */
-        text_params.set_bg_clr = 1;
-        text_params.text_bg_clr = (NvOSD_ColorParams) {
-                0, 0, 0, 1};
-        /* Font face, size and color. */
-        text_params.font_params.font_name = (gchar *) "Serif";
-        text_params.font_params.font_size = 11;
-        text_params.font_params.font_color = (NvOSD_ColorParams) {
-                1, 1, 1, 1};
-        nvds_add_obj_meta_to_frame(frame_meta, object_meta, NULL);
-    }
 }
 
 /**
